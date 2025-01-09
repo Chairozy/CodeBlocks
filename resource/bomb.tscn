@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://y4f78enl0pxt"]
+
+[ext_resource type="Texture2D" uid="uid://yskcevr6wbyd" path="res://resource/0x72_DungeonTilesetII_v1.7.png" id="1_6243a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjove"]
+atlas = ExtResource("1_6243a")
+region = Rect2(288, 320, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kre12"]
+atlas = ExtResource("1_6243a")
+region = Rect2(304, 320, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8osm"]
+atlas = ExtResource("1_6243a")
+region = Rect2(320, 320, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d30mh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjove")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kre12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8osm")
+}],
+"loop": true,
+"name": &"ticked",
+"speed": 5.0
+}]
+
+[node name="Bomb" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_d30mh")
+animation = &"ticked"
+frame_progress = 0.211725

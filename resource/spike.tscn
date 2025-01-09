@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcl78cs373org"]
+
+[ext_resource type="Texture2D" uid="uid://0vh3kl0t5ovl" path="res://resource/atlas_floor-16x16.png" id="1_5p3pp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t20tp"]
+atlas = ExtResource("1_5p3pp")
+region = Rect2(0, 48, 64, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6ucx"]
+size = Vector2(12, 12)
+
+[node name="Spike" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_t20tp")
+hframes = 4
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_h6ucx")

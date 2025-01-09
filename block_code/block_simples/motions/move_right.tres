@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c7xhtctn7yq8o"]
+
+[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="1_g65r4"]
+
+[resource]
+script = ExtResource("1_g65r4")
+name = &"move_left"
+target_node_class = ""
+description = "Move actor to left"
+category = "Motions"
+type = 2
+variant_type = 0
+display_template = "move left"
+code_template = "await movement(\"x\", -16)"
+defaults = {}
+signal_name = ""
+scope = ""
