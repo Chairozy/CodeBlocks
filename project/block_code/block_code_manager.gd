@@ -34,15 +34,7 @@ func _enter_tree():
 	Types.init_cast_graph()
 
 func script_window_requested(script: String):
-	var script_window = ScriptWindow.instantiate()
-	script_window.script_content = script
-
-	EditorInterface.get_base_control().add_child(script_window)
-
-	await script_window.close_requested
-
-	script_window.queue_free()
-	script_window = null
+	pass
 
 static func run() -> void:
 	var canvas_scene := CanvasScene.get_instance()
@@ -127,10 +119,6 @@ static func is_block_code_editable(block_code: BlockCode) -> bool:
 	# A BlockCode node can be edited if it belongs to the edited scene, or it
 	# is an editable instance.
 	return true
-	var scene_node = EditorInterface.get_edited_scene_root()
-
-	return block_code == scene_node or block_code.owner == scene_node or scene_node.is_editable_instance(block_code.owner)
-
 
 static func node_has_block_code(node: Node, recursive: bool = false) -> bool:
 	return list_block_code_nodes_for_node(node, recursive).size() > 0
@@ -145,11 +133,3 @@ static func list_block_code_nodes_for_node(node: Node, recursive: bool = false) 
 		result.append_array(node.find_children("*", "BlockCode", recursive))
 
 	return result
-
-
-func _get_plugin_name():
-	return "Block Code"
-
-
-func _get_plugin_icon():
-	return EditorInterface.get_editor_theme().get_icon("Node", "EditorIcons")

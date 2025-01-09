@@ -18,15 +18,17 @@ func _find_paths(paths: Array[NodePath], node: Node, path_root: Node, block_pare
 
 func get_defaults_for_node(context_node: Node) -> Dictionary:
 	# The default paths are only needed in the editor.
-	if not Engine.is_editor_hint():
-		return {}
+	return {}
 
-	var scene_root: Node = EditorInterface.get_edited_scene_root()
-	var path_root: Node = scene_root.get_parent()
-	var paths: Array[NodePath]
-	_find_paths(paths, scene_root, path_root, context_node)
+	#if not Engine.is_editor_hint():
+		#return {}
 
-	if not paths:
-		return {}
-
-	return {"path": OptionData.new(paths)}
+	#var scene_root: Node = EditorInterface.get_edited_scene_root()
+	#var path_root: Node = scene_root.get_parent()
+	#var paths: Array[NodePath]
+	#_find_paths(paths, scene_root, path_root, context_node)
+#
+	#if not paths:
+		#return {}
+#
+	#return {"path": OptionData.new(paths)}

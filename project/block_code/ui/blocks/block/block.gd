@@ -179,7 +179,6 @@ func _gui_input(event):
 			else:
 				dialog.dialog_text = "Delete block?"
 			dialog.confirmed.connect(remove_from_tree)
-			EditorInterface.popup_dialog_centered(dialog)
 
 
 func remove_from_tree():

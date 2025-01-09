@@ -26,8 +26,8 @@ static func node_is_part_of_edited_scene(node: Node) -> bool:
 ## path_root]. If [param path_root] is [constant null]
 ## [method EditorInterface.get_edited_scene_root().get_parent] is used.
 static func node_scene_path(node: Node, reference: Node, path_root: Node = null) -> NodePath:
-	if path_root == null:
-		path_root = EditorInterface.get_edited_scene_root().get_parent()
+	#if path_root == null:
+		#path_root = EditorInterface.get_edited_scene_root().get_parent()
 
 	if not path_root.is_ancestor_of(node):
 		push_error("Node %s is not an ancestor of %s" % [path_root, node])

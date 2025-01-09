@@ -171,8 +171,8 @@ func _on_collapse_button_pressed():
 
 
 func _on_block_canvas_add_block_code():
-	var edited_node: Node = EditorInterface.get_inspector().get_edited_object() as Node
-	var scene_root: Node = EditorInterface.get_edited_scene_root()
+	var edited_node: Node = PlayEditorInterface.get_inspector().get_edited_object() as Node
+	var scene_root: Node = PlayEditorInterface.get_edited_scene_root()
 
 	if edited_node == null or scene_root == null:
 		return
@@ -193,17 +193,17 @@ func _on_block_canvas_add_block_code():
 
 
 func _on_block_canvas_open_scene():
-	var edited_node: Node = EditorInterface.get_inspector().get_edited_object() as Node
+	var edited_node: Node = PlayEditorInterface.get_inspector().get_edited_object() as Node
 
 	if edited_node == null or edited_node.owner == null:
 		return
 
-	EditorInterface.open_scene_from_path(edited_node.scene_file_path)
+	#EditorInterface.open_scene_from_path(edited_node.scene_file_path)
 
 
 func _on_block_canvas_replace_block_code():
-	var edited_node: Node = EditorInterface.get_inspector().get_edited_object() as Node
-	var scene_root: Node = EditorInterface.get_edited_scene_root()
+	var edited_node: Node = PlayEditorInterface.get_inspector().get_edited_object() as Node
+	var scene_root: Node = PlayEditorInterface.get_edited_scene_root()
 	return #blocking
 	undo_redo.create_action("Replace block code %s" % edited_node.name, UndoRedo.MERGE_DISABLE, scene_root)
 
