@@ -39,7 +39,7 @@ var _collapsed: bool = false
 
 
 func _ready():
-	create_tween().tween_property(self, "position.y", position.y - 100, 2.0)
+	#create_tween().tween_property(self, "position:y", position.y - 100, 2.0)
 	_context.changed.connect(_on_context_changed)
 
 	_picker.block_picked.connect(_drag_manager.copy_picked_block_and_drag)

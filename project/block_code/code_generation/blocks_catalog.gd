@@ -84,7 +84,14 @@ static var _catalog: Dictionary
 
 
 static func _setup_definitions_from_files():
-	var definition_files = Util.get_files_in_dir_recursive(_BLOCKS_PATH, "*.tres")
+	#var definition_files = Util.get_files_in_dir_recursive(_BLOCKS_PATH, "*.tres")
+	var definition_files := [
+		_BLOCKS_PATH + "lifecycle/ready.tres",
+		_BLOCKS_PATH + "motions/move_down.tres",
+		_BLOCKS_PATH + "motions/move_left.tres",
+		_BLOCKS_PATH + "motions/move_right.tres",
+		_BLOCKS_PATH + "motions/move_up.tres",
+	]
 	for file in definition_files:
 		var block_definition: BlockDefinition = load(file)
 		_catalog[block_definition.name] = block_definition
