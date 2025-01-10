@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .quiz-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .section {
+      margin-bottom: 50px;
+    }
+    .question {
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+    .article {
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+    .instruction {
+      margin-bottom: 20px;
+      font-size: 1.2em;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+    }
+    .options li {
+      margin: 10px 0;
+    }
+    .options input {
+      margin-right: 10px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1em;
+      color: #fff;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #28a745;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="quiz"></div>
+
+    <button id="submit" class="btn">Submit</button>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+  function shuffleArray(array) {
+  // Duplicate the array to avoid modifying the original
+  let arr = array.slice();
+
+  // Fisher-Yates Shuffle Algorithm
+  for (let i = arr.length - 1; i > 0; i--) {
+    // Generate a random index
+    let j = Math.floor(Math.random() * (i + 1));
+
+    // Swap elements arr[i] and arr[j]
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+
+  return arr;
+}
+    const quizData = [
+  {
+    instruction: "Tuliskan algoritma untuk menghitung jumlah elemen di dalam sebuah list Python.",
+    article: "Dalam Python, Anda dapat menggunakan fungsi built-in seperti `len()` untuk menghitung jumlah elemen dalam sebuah list.",
+    question: "Bagaimana cara menghitung jumlah elemen dalam list `data = [1, 2, 3, 4, 5]`?",
+    options: [
+      "Menggunakan `len(data)`" ,
+      "Menggunakan `sum(data)`" ,
+      "Menggunakan `count(data)`" ,
+      "Menggunakan `length(data)`",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara mencari elemen tertentu dalam sebuah list menggunakan Python.",
+    article: "Python menyediakan metode seperti `in` untuk memeriksa keberadaan suatu elemen di dalam list.",
+    question: "Bagaimana cara memeriksa apakah angka 3 ada dalam list `numbers = [1, 2, 3, 4, 5]`?",
+    options: [
+      "Menggunakan `3 in numbers`" ,
+      "Menggunakan `numbers.contains(3)`" ,
+      "Menggunakan `numbers.has(3)`" ,
+      "Menggunakan `3.find(numbers)`",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara menghitung jumlah kemunculan elemen tertentu dalam list.",
+    article: "Anda dapat menggunakan metode `count()` dalam list Python untuk menghitung jumlah kemunculan elemen tertentu.",
+    question: "Bagaimana cara menghitung jumlah kemunculan angka 2 dalam list `data = [1, 2, 2, 3, 4, 2]`?",
+    options: [
+      "data.count(2)" ,
+      "count(2, data)" ,
+      "data.find(2)" ,
+      "data.total(2)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara menambahkan elemen ke dalam list di Python.",
+    article: "Python menyediakan metode `append()` untuk menambahkan elemen ke akhir list.",
+    question: "Bagaimana cara menambahkan angka 6 ke list `numbers = [1, 2, 3, 4, 5]`?",
+    options: [
+      "numbers.append(6)" ,
+      "append(numbers, 6)" ,
+      "numbers.add(6)" ,
+      "numbers.extend(6)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara mengurutkan elemen dalam list Python.",
+    article: "Gunakan metode `sort()` untuk mengurutkan elemen dalam list secara ascending.",
+    question: "Bagaimana cara mengurutkan list `numbers = [5, 3, 1, 4, 2]`?",
+    options: [
+      "numbers.sort()" ,
+      "sort(numbers)" ,
+      "numbers.sorted()" ,
+      "numbers.arrange()",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara membalik urutan elemen dalam list Python.",
+    article: "Python menyediakan metode `reverse()` untuk membalik urutan elemen dalam list.",
+    question: "Bagaimana cara membalik urutan list `numbers = [1, 2, 3, 4, 5]`?",
+    options: [
+      "numbers.reverse()" ,
+      "reverse(numbers)" ,
+      "numbers.flip()" ,
+      "numbers.arrange(reverse=True)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara menghapus elemen tertentu dalam list.",
+    article: "Metode `remove()` memungkinkan Anda untuk menghapus elemen tertentu dalam list berdasarkan nilai.",
+    question: "Bagaimana cara menghapus angka 3 dari list `data = [1, 2, 3, 4, 5]`?",
+    options: [
+      "data.remove(3)" ,
+      "remove(data, 3)" ,
+      "data.delete(3)" ,
+      "data.pop(3)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara mengakses elemen dalam list menggunakan indeks.",
+    article: "Dalam Python, Anda dapat mengakses elemen dalam list menggunakan notasi indeks, misalnya `list_name[index]`.",
+    question: "Bagaimana cara mengakses elemen pertama dari list `data = [10, 20, 30]`?",
+    options: [
+      "data[0]" ,
+      "data[1]" ,
+      "data.first()" ,
+      "data.get(1)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara mengganti elemen dalam list.",
+    article: "Anda dapat mengganti elemen tertentu dalam list menggunakan notasi indeks, misalnya `list_name[index] = value`.",
+    question: "Bagaimana cara mengganti elemen kedua dari list `data = [10, 20, 30]` menjadi 25?",
+    options: [
+      "data[1] = 25" ,
+      "data[2] = 25" ,
+      "replace(data, 1, 25)" ,
+      "data.update(1, 25)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara memotong (slicing) list di Python.",
+    article: "Anda dapat memotong list menggunakan notasi `list[start:end]` untuk mengambil subset dari elemen-elemen tertentu.",
+    question: "Bagaimana cara mengambil elemen kedua hingga keempat dari list `data = [10, 20, 30, 40, 50]`?",
+    options: [
+      "data[1:4]" ,
+      "data[2:5]" ,
+      "data[2,4]" ,
+      "data(1:4)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara menggabungkan dua list di Python.",
+    article: "Gunakan operator `+` atau metode `extend()` untuk menggabungkan dua list.",
+    question: "Bagaimana cara menggabungkan list `a = [1, 2]` dan `b = [3, 4]`?",
+    options: [
+      "a + b" ,
+      "combine(a, b)" ,
+      "a.append(b)" ,
+      "a.concat(b)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara menghitung total nilai dalam list.",
+    article: "Gunakan fungsi `sum()` untuk menghitung jumlah semua elemen dalam list.",
+    question: "Bagaimana cara menghitung total elemen dalam list `data = [1, 2, 3, 4, 5]`?",
+    options: [
+      "sum(data)" ,
+      "data.sum()" ,
+      "total(data)" ,
+      "add(data)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara membuat salinan list.",
+    article: "Gunakan metode `copy()` atau slicing untuk membuat salinan list di Python.",
+    question: "Bagaimana cara membuat salinan dari list `numbers = [1, 2, 3]`?",
+    options: [
+      "numbers.copy()" ,
+      "copy(numbers)" ,
+      "numbers.clone()" ,
+      "clone(numbers)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara mencari indeks elemen dalam list.",
+    article: "Gunakan metode `index()` untuk menemukan posisi elemen tertentu dalam list.",
+    question: "Bagaimana cara menemukan indeks angka 4 dalam list `data = [1, 2, 3, 4, 5]`?",
+    options: [
+      "data.index(4)" ,
+      "index(data, 4)" ,
+      "data.find(4)" ,
+      "data.position(4)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara menghapus elemen terakhir dari list.",
+    article: "Metode `pop()` menghapus elemen terakhir dari list dan mengembalikannya.",
+    question: "Bagaimana cara menghapus elemen terakhir dari list `numbers = [10, 20, 30]`?",
+    options: [
+      "numbers.pop()" ,
+      "pop(numbers)" ,
+      "numbers.remove()" ,
+      "numbers.delete()",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara membandingkan dua list di Python.",
+    article: "Gunakan operator `==` untuk membandingkan apakah dua list memiliki elemen yang sama.",
+    question: "Bagaimana cara memeriksa apakah `a = [1, 2, 3]` sama dengan `b = [1, 2, 3]`?",
+    options: [
+      "a == b" ,
+      "compare(a, b)" ,
+      "a.equals(b)" ,
+      "check(a, b)",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara menggunakan list comprehension untuk membuat list baru.",
+    article: "Gunakan list comprehension untuk membuat list baru dengan elemen yang dihasilkan dari operasi tertentu.",
+    question: "Bagaimana cara membuat list kuadrat dari `numbers = [1, 2, 3]` menggunakan list comprehension?",
+    options: [
+      "[x**2 for x in numbers]" ,
+      "[x^2 for x in numbers]" ,
+      "[x*2 for x in numbers]" ,
+      "[square(x) for x in numbers]",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara mencari nilai maksimum dalam list.",
+    article: "Gunakan fungsi `max()` untuk menemukan elemen terbesar dalam list.",
+    question: "Bagaimana cara menemukan nilai maksimum dari list `data = [10, 20, 30]`?",
+    options: [
+      "max(data)" ,
+      "data.max()" ,
+      "maximum(data)" ,
+      "data.maximum()",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara menghapus semua elemen dalam list.",
+    article: "Metode `clear()` menghapus semua elemen dalam list, meninggalkannya kosong.",
+    question: "Bagaimana cara mengosongkan list `numbers = [1, 2, 3]`?",
+    options: [
+      "numbers.clear()" ,
+      "clear(numbers)" ,
+      "numbers.empty()" ,
+      "numbers.remove_all()",
+    ],
+    answer: "a"
+  },
+  {
+    instruction: "Pelajari cara menggunakan metode `extend()` untuk menambahkan elemen dari list lain.",
+    article: "Metode `extend()` menambahkan elemen dari list lain ke list yang ada.",
+    question: "Bagaimana cara menambahkan elemen dari `b = [4, 5]` ke `a = [1, 2, 3]`?",
+    options: [
+      "a.extend(b)" ,
+      "extend(a, b)" ,
+      "a.add(b)" ,
+      "a + b",
+    ],
+    answer: "a"
+  }
+    ];
+
+    const quizContainer = document.getElementById('quiz');
+    const submitButton = document.getElementById('submit');
+    const resultContainer = document.getElementById('result');
+
+    function loadQuiz() {
+      quizContainer.innerHTML = '';
+      quizData.forEach((q, index) => {
+        const questionEl = document.createElement('div');
+        questionEl.classList.add('section');
+        questionEl.innerHTML = `
+          <div class="article">${q.article}</div>
+          <div class="instruction">${q.instruction}</div>
+          <div class="question">${index + 1}. ${q.question}</div>
+          <ul class="options">
+            ${shuffleArray(q.options).map((opt, optIndex) => `
+              <li>
+                <label>
+                  <input type="radio" name="question${index}" value="${optIndex}">
+                  ${opt}
+                </label>
+              </li>
+            `).join('')}
+          </ul>
+        `;
+        quizContainer.appendChild(questionEl);
+      });
+    }
+
+    function calculateResult() {
+      // let score = 0;
+      // quizData.forEach((q, index) => {
+      //   const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+      //   if (selectedOption && selectedOption.value === q.answer) {
+      //     score++;
+      //   }
+      // });
+      // resultContainer.textContent = `You scored ${score} out of ${quizData.length}!`;
+    }
+
+    loadQuiz();
+    submitButton.addEventListener('click', calculateResult);
+  </script>
+</body>
+</html>
