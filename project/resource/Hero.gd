@@ -27,7 +27,7 @@ func movement(axis: String, distance: int, repeat: int):
 	$AnimatedSprite2D.play("walk")
 	if axis == "x":
 		$AnimatedSprite2D.flip_h = distance < 0
-	await create_tween().tween_method(Callable(self, &"tween_move_and_collide").bind({"axis": axis, "latest_distance": 0.0, "distance": 0.0, "back": false, "travel": 0.0}), 0.0, float(distance), float(repeat)).finished
+	await create_tween().tween_method(Callable(self, &"tween_move_and_collide").bind({"axis": axis, "latest_distance": 0.0, "distance": 0.0, "back": false, "travel": 0.0}), 0.0, float(distance), float(repeat) * 0.5).finished
 	$AnimatedSprite2D.play("default")
 
 func goal(node: Area2D):
