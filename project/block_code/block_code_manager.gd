@@ -1,4 +1,4 @@
-extends Node
+extends CanvasLayer
 class_name BlockCodeManager
 
 const MainPanelScene := preload("res://block_code/ui/main_panel.tscn")
@@ -48,26 +48,26 @@ static func stop() -> void:
 	canvas_scene.show()
 
 func _ready():
-	var i_main_panel = MainPanelScene.instantiate()
-	add_child(i_main_panel)
+	main_panel = MainPanelScene.instantiate()
+	add_child(main_panel)
 	_instance = self
 	#editor_inspector.connect("edited_object_changed", _on_editor_inspector_edited_object_changed)
 	#_on_editor_inspector_edited_object_changed()
 
-func make_bottom_panel_item_visible(_main_panel: MainPanel) -> void:
-	add_child(_main_panel)
+#func make_bottom_panel_item_visible(_main_panel: MainPanel) -> void:
+	#add_child(_main_panel)
 
-func _on_editor_inspector_edited_object_changed():
-	var edited_object = editor_inspector.get_edited_object()
-	var block_code_node = edited_object as BlockCode
-	if block_code_node:
-		# If a block code node was explicitly selected, activate the
-		# Block Code panel.
-		make_bottom_panel_item_visible(main_panel)
-	else:
-		# Find the first block code child.
-		block_code_node = list_block_code_nodes_for_node(edited_object as Node).pop_front()
-	select_block_code_node(block_code_node)
+#func _on_editor_inspector_edited_object_changed():
+	#var edited_object = editor_inspector.get_edited_object()
+	#var block_code_node = edited_object as BlockCode
+	#if block_code_node:
+		## If a block code node was explicitly selected, activate the
+		## Block Code panel.
+		#make_bottom_panel_item_visible(main_panel)
+	#else:
+		## Find the first block code child.
+		#block_code_node = list_block_code_nodes_for_node(edited_object as Node).pop_front()
+	#select_block_code_node(block_code_node)
 
 
 func select_block_code_node(block_code: BlockCode):

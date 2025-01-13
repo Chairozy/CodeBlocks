@@ -1,42 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://c5jxwx5qmvwiw"]
+[gd_scene load_steps=3 format=3 uid="uid://c5jxwx5qmvwiw"]
 
 [ext_resource type="Script" path="res://block_code/block_code_manager.gd" id="1_onpfp"]
-[ext_resource type="PackedScene" uid="uid://xuvl8pnkt8nw" path="res://resource/hero.tscn" id="2_0wnso"]
-[ext_resource type="PackedScene" uid="uid://c1bk6uqeeqq1i" path="res://resource/level_1.tscn" id="2_n3wjt"]
-[ext_resource type="Script" path="res://block_code/block_code_node/block_code.gd" id="3_0r27k"]
-[ext_resource type="Script" path="res://block_code/canvas_scene.gd" id="3_4i7v6"]
-[ext_resource type="PackedScene" uid="uid://cxtyyvbirjd0y" path="res://resource/reward.tscn" id="3_vbxf6"]
-[ext_resource type="Script" path="res://block_code/serialization/block_script_serialization.gd" id="5_pc8ib"]
-[ext_resource type="Resource" uid="uid://dqjh75jb6ds68" path="res://resource/hero.tres" id="7_minnd"]
-
-[sub_resource type="Resource" id="Resource_r2b1t"]
-script = ExtResource("5_pc8ib")
-script_inherits = ""
-script_extends = ExtResource("7_minnd")
-block_serialization_trees = Array[Resource("res://block_code/serialization/block_serialization_tree.gd")]([])
-variables = Array[Resource("res://block_code/code_generation/variable_definition.gd")]([])
-generated_script = ""
-version = 0
+[ext_resource type="PackedScene" uid="uid://dy335xr3wdn1e" path="res://resource/Stage1.tscn" id="2_rud2u"]
 
 [node name="Game" type="Node"]
 
-[node name="Stage" type="Node2D" parent="."]
-scale = Vector2(4, 4)
-
-[node name="CanvasScene" type="Node2D" parent="Stage"]
-script = ExtResource("3_4i7v6")
-
-[node name="Level1" parent="Stage/CanvasScene" instance=ExtResource("2_n3wjt")]
-
-[node name="Reward" parent="Stage/CanvasScene" instance=ExtResource("3_vbxf6")]
-position = Vector2(56, 24)
-
-[node name="Hero" parent="Stage/CanvasScene" instance=ExtResource("2_0wnso")]
-position = Vector2(40, 56)
-
-[node name="BlockCode" type="Node" parent="Stage/CanvasScene/Hero"]
-script = ExtResource("3_0r27k")
-block_script = SubResource("Resource_r2b1t")
-
-[node name="BlockCodeManager" type="Node" parent="."]
+[node name="BlockCodeManager" type="CanvasLayer" parent="."]
 script = ExtResource("1_onpfp")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(40, 56)
+zoom = Vector2(4, 4)
+
+[node name="Stage" type="Node2D" parent="."]
+
+[node name="Stage1" parent="Stage" node_paths=PackedStringArray("camera2d") instance=ExtResource("2_rud2u")]
+camera2d = NodePath("../../Camera2D")

@@ -15,13 +15,8 @@ func create_preview() -> Node2D:
 	var scene_root := duplicate()
 
 	for child in scene_root.get_children():
-		child.reparent(preview_scene)
+		if child.visible:
+			child.reparent(preview_scene)
 
 	return preview_scene
 
-func _rebuild_children(ori_node: Node) -> Node:
-	var node = ori_node.duplicate()
-	var childs: Array[Node] = []
-	for child in ori_node.get_children():
-		childs.append(_rebuild_children(child))
-	return node

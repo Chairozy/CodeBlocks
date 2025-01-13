@@ -9,13 +9,11 @@ region = Rect2(32, 80, 32, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h6ucx"]
 size = Vector2(12, 12)
 
-[node name="Toggle" type="Node2D"]
+[node name="Toggle" type="Area2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_t20tp")
 hframes = 2
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h6ucx")

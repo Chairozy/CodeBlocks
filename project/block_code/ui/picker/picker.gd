@@ -72,6 +72,8 @@ func _update_block_components():
 		block_category_display.hide()
 
 	for category in block_categories:
+		if category.name == "Lifecycle":
+			continue
 		var block_definitions := _context.block_script.get_blocks_in_category(category)
 		var order_override = CATEGORY_ORDER_OVERRIDE.get(category.name)
 		if order_override:

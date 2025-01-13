@@ -10,8 +10,10 @@ description = "Move actor to down"
 category = "Motions"
 type = 2
 variant_type = 0
-display_template = "move down"
-code_template = "await movement(\"y\", 16)"
-defaults = {}
+display_template = "move to down {number: INT} steps"
+code_template = "await movement(\"y\", 16 * {number})"
+defaults = {
+"number": 1
+}
 signal_name = ""
 scope = ""

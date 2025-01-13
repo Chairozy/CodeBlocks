@@ -18,7 +18,6 @@ canvas_position = Vector2(54, 47)
 [resource]
 script = ExtResource("2_yjlcv")
 script_inherits = "INHERIT_DEFAULT"
-script_extends = ""
 block_serialization_trees = Array[ExtResource("1_opywe")]([SubResource("Resource_8sqy5")])
 variables = Array[Resource("res://block_code/code_generation/variable_definition.gd")]([])
 generated_script = "extends INHERIT_DEFAULT"

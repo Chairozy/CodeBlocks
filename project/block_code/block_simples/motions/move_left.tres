@@ -10,8 +10,10 @@ description = "Move actor to right"
 category = "Motions"
 type = 2
 variant_type = 0
-display_template = "move right"
-code_template = "await movement(\"x\", 16)"
-defaults = {}
+display_template = "move to right {number: INT} steps"
+code_template = "await movement(\"x\", 16 * {number})"
+defaults = {
+"number": 1
+}
 signal_name = ""
 scope = ""

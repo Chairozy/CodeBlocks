@@ -58,12 +58,7 @@ func _on_undo_redo_version_changed():
 
 func _on_show_script_button_pressed():
 	var script: String = _block_canvas.generate_script_from_current_window()
-
 	#script_window_requested.emit(script)
-
-func _on_close_node_button_pressed():
-	$MarginContainer.hide()
-	$VBoxContainer.show()
 
 func _try_migration():
 	var version: int = _context.block_script.version
@@ -239,14 +234,16 @@ func _create_variable(variable: VariableDefinition):
 	_picker.reload_blocks()
 
 
-func _on_block_code_node_pressed():
-	$MarginContainer.show()
-	$VBoxContainer.hide()
-
-func _on_run_node_pressed():
-	if $VBoxContainer/RunNode.text == "Run":
-		BlockCodeManager.run()
-		$VBoxContainer/RunNode.text = "Stop"
+func _on_block_code_node_pressed(toggle):
+	if toggle:
+		%CodePanel.show()
 	else:
+		%CodePanel.hide()
+
+func _on_run_node_pressed(toggle):
+	if toggle:
+		%BlockCodeNode.button_pressed = false
+		BlockCodeManager.run()
+	else:
+		%BlockCodeNode.button_pressed = true
 		BlockCodeManager.stop()
-		$VBoxContainer/RunNode.text = "Run"

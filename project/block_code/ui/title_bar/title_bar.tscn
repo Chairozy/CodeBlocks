@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bm1183pm05p6a"]
+[gd_scene load_steps=4 format=3 uid="uid://bm1183pm05p6a"]
 
 [ext_resource type="Script" path="res://block_code/ui/title_bar/title_bar.gd" id="1_hpvmt"]
+[ext_resource type="Texture2D" uid="uid://d1ploy3jka4qe" path="res://resource/UI.png" id="2_xlash"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_igmj4"]
+texture = ExtResource("2_xlash")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(96, 32, 8, 8)
 
 [node name="TitleBar" type="MarginContainer"]
 custom_minimum_size = Vector2(0, 40)
@@ -10,6 +19,7 @@ script = ExtResource("1_hpvmt")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_igmj4")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
