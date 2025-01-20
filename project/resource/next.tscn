@@ -36,6 +36,7 @@ animations = [{
 size = Vector2(14, 14)
 
 [node name="Next" type="Area2D"]
+collision_layer = 0
 monitorable = false
 script = ExtResource("1_apa1u")
 

@@ -1,6 +1,5 @@
+class_name BlockSerializationTree
 extends Resource
-
-const BlockSerialization = preload("res://block_code/serialization/block_serialization.gd")
 
 @export var root: BlockSerialization
 @export var canvas_position: Vector2

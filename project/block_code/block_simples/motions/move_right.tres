@@ -1,19 +1,18 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c7xhtctn7yq8o"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bletyh42e5a6p"]
 
-[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="1_g65r4"]
+[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="2_x5lm1"]
 
 [resource]
-script = ExtResource("1_g65r4")
-name = &"move_left"
+script = ExtResource("2_x5lm1")
+name = &"move_right"
 target_node_class = ""
-description = "Move actor to left"
+description = "Move actor to right"
 category = "Motions"
 type = 2
 variant_type = 0
-display_template = "move to left {number: INT} steps"
-code_template = "await movement(\"x\", -16, {number})"
-defaults = {
-"number": 1
-}
+display_template = "<104,32,16,16>"
+code_template = "act.add(movement.bind(\"x\", 16))"
+defaults = {}
 signal_name = ""
 scope = ""
+extend_of = Array[StringName]([])

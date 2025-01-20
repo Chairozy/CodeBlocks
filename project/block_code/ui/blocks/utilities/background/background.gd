@@ -48,6 +48,36 @@ func _ready():
 	parent_block.focus_exited.connect(queue_redraw)
 
 
+func round_corner(polygon: PackedVector2Array, point: Vector2, side: String):
+	if side == "br":
+		polygon.append(Vector2(point.x, point.y - 10.0))
+		polygon.append(Vector2(point.x - 1.0, point.y - 4.0))
+		polygon.append(Vector2(point.x - 2.0, point.y - 3.0))
+		polygon.append(Vector2(point.x - 3.0, point.y - 2.0))
+		polygon.append(Vector2(point.x - 4.0, point.y - 1.0))
+		polygon.append(Vector2(point.x - 10.0, point.y))
+	elif side == "tr":
+		polygon.append(Vector2(point.x - 10.0, point.y))
+		polygon.append(Vector2(point.x - 4.0, point.y + 1.0))
+		polygon.append(Vector2(point.x - 3.0, point.y + 2.0))
+		polygon.append(Vector2(point.x - 2.0, point.y + 3.0))
+		polygon.append(Vector2(point.x - 1.0, point.y + 4.0))
+		polygon.append(Vector2(point.x, point.y + 10.0))
+	elif side == "bl":
+		polygon.append(Vector2(point.x + 10.0, point.y))
+		polygon.append(Vector2(point.x + 4.0, point.y - 1.0))
+		polygon.append(Vector2(point.x + 3.0, point.y - 2.0))
+		polygon.append(Vector2(point.x + 2.0, point.y - 3.0))
+		polygon.append(Vector2(point.x + 1.0, point.y - 4.0))
+		polygon.append(Vector2(point.x, point.y - 10.0))
+	elif side == "tl":
+		polygon.append(Vector2(point.x, point.y + 10.0))
+		polygon.append(Vector2(point.x + 1.0, point.y + 4.0))
+		polygon.append(Vector2(point.x + 2.0, point.y + 3.0))
+		polygon.append(Vector2(point.x + 3.0, point.y + 2.0))
+		polygon.append(Vector2(point.x + 4.0, point.y + 1.0))
+		polygon.append(Vector2(point.x + 10.0, point.y))
+
 func _draw():
 	var fill_polygon: PackedVector2Array
 	fill_polygon.append(Vector2(0.0, 0.0))
@@ -57,14 +87,17 @@ func _draw():
 		fill_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z + Constants.KNOB_W + shift_top, Constants.KNOB_H))
 		fill_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z * 2 + Constants.KNOB_W + shift_top, 0.0))
 
-	fill_polygon.append(Vector2(size.x, 0.0))
-	fill_polygon.append(Vector2(size.x, size.y))
+	round_corner(fill_polygon, Vector2(size.x, 0.0), "tr")
+	round_corner(fill_polygon, Vector2(size.x, size.y), "br")
+
 	fill_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z * 2 + Constants.KNOB_W + shift_bottom, size.y))
 	fill_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z + Constants.KNOB_W + shift_bottom, size.y + Constants.KNOB_H))
 	fill_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z + shift_bottom, size.y + Constants.KNOB_H))
 	fill_polygon.append(Vector2(Constants.KNOB_X + shift_bottom, size.y))
 	fill_polygon.append(Vector2(0.0, size.y))
 	fill_polygon.append(Vector2(0.0, 0.0))
+	#round_corner(fill_polygon, Vector2(0.0, size.y), "bl")
+	#round_corner(fill_polygon, Vector2(0.0, 0.0), "tl")
 
 	var stroke_polygon: PackedVector2Array
 	var edge_polygon: PackedVector2Array
@@ -81,8 +114,9 @@ func _draw():
 		stroke_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z + Constants.KNOB_W + shift_top, Constants.KNOB_H))
 		stroke_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z * 2 + Constants.KNOB_W + shift_top, 0.0))
 
-	stroke_polygon.append(Vector2(size.x, 0.0))
-	stroke_polygon.append(Vector2(size.x, size.y))
+	round_corner(stroke_polygon, Vector2(size.x, 0.0), "tr")
+	round_corner(stroke_polygon, Vector2(size.x, size.y), "br")
+
 	stroke_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z * 2 + Constants.KNOB_W + shift_bottom, size.y))
 	stroke_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z + Constants.KNOB_W + shift_bottom, size.y + Constants.KNOB_H))
 	stroke_polygon.append(Vector2(Constants.KNOB_X + Constants.KNOB_Z + shift_bottom, size.y + Constants.KNOB_H))

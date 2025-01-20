@@ -146,7 +146,13 @@ func _snaps_to(node: Node) -> bool:
 			var tree_scope := BlockTreeUtil.get_tree_scope(top_block)
 			if tree_scope != "" and _block_scope != tree_scope:
 				return false
-
+	
+	
+	if not _block.definition.extend_of.is_empty():
+		var _snap_block: Block = _snap_point.get_parent().get_parent() as Block
+		if not _snap_block or not (_snap_block.definition.name in _block.definition.extend_of):
+			return false
+		
 	return true
 
 

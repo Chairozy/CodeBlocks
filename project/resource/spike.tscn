@@ -1,16 +1,63 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcl78cs373org"]
+[gd_scene load_steps=5 format=3 uid="uid://dcl78cs373org"]
 
 [ext_resource type="Texture2D" uid="uid://0vh3kl0t5ovl" path="res://resource/atlas_floor-16x16.png" id="1_5p3pp"]
+
+[sub_resource type="GDScript" id="GDScript_tqoeq"]
+script/source = "extends Area2D
+
+@export var is_preview := false
+var sequence := {}
+var attack := 1
+
+func turn(preview_scene: PreviewScene):
+	var turn_names := sequence.keys()
+	turn_names.erase(\"start\")
+	for turn_name in turn_names:
+		preview_scene.turns.append(sequence[turn_name])
+	if sequence.has(\"start\"):
+		await sequence[\"start\"].exec()
+
+func toggle_spike():
+	await create_tween().tween_method(Callable(func(value: int):
+		$Sprite2D.frame = value
+		if value == 0:
+			monitoring = false
+		elif value == 3:
+			monitoring = true
+		),
+		0 if $Sprite2D.frame == 0 else 3,
+		3 if $Sprite2D.frame == 0 else 0,
+		0.5).finished
+
+func start():
+	var act := Action.new()
+	sequence[\"start\"] = act
+	act.add_control(func(cl): return true, true)
+	sequence[\"start\"].add(toggle_spike)
+	act.remove_control()
+
+func _ready():
+	if is_preview:
+		get_parent().get_parent().append_actor(self, \"spike\")
+		body_entered.connect(func(body):
+			if body.has_method(&\"demaged\"):
+				body.call(&\"demaged\", self)
+			)
+	else:
+		is_preview = true
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t20tp"]
 atlas = ExtResource("1_5p3pp")
 region = Rect2(0, 48, 64, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6ucx"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_et21t"]
 size = Vector2(12, 12)
 
 [node name="Spike" type="Area2D"]
-collision_mask = 0
+collision_layer = 0
+monitorable = false
+script = SubResource("GDScript_tqoeq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_t20tp")
@@ -18,4 +65,4 @@ hframes = 4
 frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_h6ucx")
+shape = SubResource("RectangleShape2D_et21t")

@@ -68,9 +68,10 @@ func insert_snapped_block(new_block: Block) -> Block:
 		add_child(new_block)
 
 	if new_block and old_block:
-		var last_snap = _get_last_snap(new_block)
-		if last_snap:
-			old_block = last_snap.insert_snapped_block(old_block)
+		if old_block.definition.extend_of.is_empty() or new_block.definition.name in old_block.definition.extend_of:
+			var last_snap = _get_last_snap(new_block)
+			if last_snap:
+				old_block = last_snap.insert_snapped_block(old_block)
 
 	return old_block
 

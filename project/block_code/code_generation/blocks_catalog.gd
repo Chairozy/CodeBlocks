@@ -87,13 +87,16 @@ static func _setup_definitions_from_files():
 	#var definition_files = Util.get_files_in_dir_recursive(_BLOCKS_PATH, "*.tres")
 	var definition_files := [
 		"lifecycle/ready.tres",
+		"lifecycle/when_demaged.tres",
+		"motions/move_right.tres",
 		"motions/move_down.tres",
 		"motions/move_left.tres",
-		"motions/move_right.tres",
 		"motions/move_up.tres",
 		"loops/for.tres",
 		"loops/forever.tres",
-		
+		"logic/if.tres",
+		"logic/else_if.tres",
+		"logic/else.tres",
 	]
 	for file in definition_files:
 		var block_definition: BlockDefinition = load(_BLOCKS_PATH + file)

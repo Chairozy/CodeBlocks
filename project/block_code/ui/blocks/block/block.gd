@@ -47,7 +47,7 @@ var _block_extension: BlockExtension
 
 func _ready():
 	focus_mode = FocusMode.FOCUS_ALL
-	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	mouse_filter = Control.MOUSE_FILTER_STOP
 	focus_entered.connect(_block_on_focus_entered)
 	focus_exited.connect(_block_on_focus_exited)
 	_on_definition_changed()

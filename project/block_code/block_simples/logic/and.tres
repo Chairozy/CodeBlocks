@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c7whg5nr0rgwr"]
+
+[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="1_1btju"]
+
+[resource]
+script = ExtResource("1_1btju")
+name = &"and"
+target_node_class = ""
+description = ""
+category = "Logic | Boolean"
+type = 3
+variant_type = 1
+display_template = "{bool1: BOOL} and {bool2: BOOL}"
+code_template = "{bool1} and {bool2}"
+defaults = {}
+signal_name = ""
+scope = ""

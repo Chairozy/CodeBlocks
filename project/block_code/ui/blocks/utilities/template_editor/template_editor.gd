@@ -12,8 +12,6 @@ const ParameterInputScene = preload("res://block_code/ui/blocks/utilities/parame
 const ParameterOutput = preload("res://block_code/ui/blocks/utilities/parameter_output/parameter_output.gd")
 const ParameterOutputScene = preload("res://block_code/ui/blocks/utilities/parameter_output/parameter_output.tscn")
 
-const FORMAT_STRING_PATTERN = "\\[(?<out_parameter>[^\\]]+)\\]|\\{(?<in_parameter>[^}]+)\\}|(?<label>[^\\{\\[]+)"
-
 ## A string describing a block's display format. For example:
 ## [br]
 ## [code]
@@ -40,8 +38,6 @@ var parent_block: Block
 var _parameter_inputs_by_name: Dictionary
 
 @onready var _container := %Container
-@onready var _regex := RegEx.create_from_string(FORMAT_STRING_PATTERN)
-
 
 func _ready() -> void:
 	parent_block = BlockTreeUtil.get_parent_block(self)
@@ -90,13 +86,28 @@ func _update_from_format_string():
 
 	var match_id = 0
 	for item in BlockDefinition.parse_display_template(format_string):
-		if item.has("label"):
+		if item.has("icon"):
+			_append_icon(item.get("icon"))
+		elif item.has("label"):
 			_append_label(item.get("label"))
 		elif item.has("in_parameter"):
 			_append_input_parameter(item.get("in_parameter"), match_id)
 		elif item.has("out_parameter"):
 			_append_output_parameter(item.get("out_parameter"), match_id)
 		match_id += 1
+
+
+func _append_icon(icon: String):
+	var params := icon.split(",")
+	var texture_rect := TextureRect.new()
+	texture_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	texture_rect.custom_minimum_size = Vector2(32.0, 32.0)
+	texture_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	texture_rect.texture = AtlasTexture.new()
+	texture_rect.texture.atlas = load("res://resource/UI.png")
+	texture_rect.texture.region = Rect2(float(params[0]), float(params[1]), float(params[2]), float(params[3]))
+	_container.add_child(texture_rect)
 
 
 func _append_label(label_format: String):

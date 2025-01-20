@@ -1,19 +1,18 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://buxdnohive7gv"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c523o0g6mkgkl"]
 
-[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="1_mjlgf"]
+[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="2_nrpr3"]
 
 [resource]
-script = ExtResource("1_mjlgf")
+script = ExtResource("2_nrpr3")
 name = &"move_up"
 target_node_class = ""
 description = "Move actor to up"
 category = "Motions"
 type = 2
 variant_type = 0
-display_template = "move to up {number: INT} steps"
-code_template = "await movement(\"y\", -16, {number})"
-defaults = {
-"number": 1
-}
+display_template = "<152,32,16,16>"
+code_template = "act.add(movement.bind(\"y\", -16))"
+defaults = {}
 signal_name = ""
 scope = ""
+extend_of = Array[StringName]([])

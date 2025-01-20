@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dtudyop44ulsb"]
+
+[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="1_1dmnd"]
+
+[resource]
+script = ExtResource("1_1dmnd")
+name = &"else"
+target_node_class = ""
+description = ""
+category = "Logic | Conditionals"
+type = 4
+variant_type = 0
+display_template = "<168,48,16,16>"
+code_template = "act.add_control(func(): return true, false, true)"
+defaults = {}
+signal_name = ""
+scope = ""
+extend_of = Array[StringName]([&"if", &"else_if"])

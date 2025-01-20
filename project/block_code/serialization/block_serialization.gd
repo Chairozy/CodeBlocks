@@ -1,6 +1,5 @@
+class_name BlockSerialization
 extends Resource
-
-const BlockSerialization = preload("res://block_code/serialization/block_serialization.gd")
 
 @export var name: StringName
 @export var children: Array[BlockSerialization]

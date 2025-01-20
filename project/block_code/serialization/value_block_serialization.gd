@@ -1,3 +1,4 @@
+class_name ValueBlockSerialization
 extends Resource
 
 @export var name: StringName

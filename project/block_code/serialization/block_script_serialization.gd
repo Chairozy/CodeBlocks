@@ -5,12 +5,9 @@ const ASTList = preload("res://block_code/code_generation/ast_list.gd")
 const BlockAST = preload("res://block_code/code_generation/block_ast.gd")
 const BlockCategory = preload("res://block_code/ui/picker/categories/block_category.gd")
 const BlockDefinition = preload("res://block_code/code_generation/block_definition.gd")
-const BlockSerialization = preload("res://block_code/serialization/block_serialization.gd")
-const BlockSerializationTree = preload("res://block_code/serialization/block_serialization_tree.gd")
 const BlocksCatalog = preload("res://block_code/code_generation/blocks_catalog.gd")
 const CategoryFactory = preload("res://block_code/ui/picker/categories/category_factory.gd")
 const Types = preload("res://block_code/types/types.gd")
-const ValueBlockSerialization = preload("res://block_code/serialization/value_block_serialization.gd")
 const VariableDefinition = preload("res://block_code/code_generation/variable_definition.gd")
 
 const SCENE_PER_TYPE = {

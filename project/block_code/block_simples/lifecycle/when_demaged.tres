@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c3chi0syoypqw"]
+
+[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="1_kw1yp"]
+
+[resource]
+script = ExtResource("1_kw1yp")
+name = &"when_demaged"
+target_node_class = ""
+description = "Attached blocks will be executed when hero take demage"
+category = "Lifecycle"
+type = 1
+variant_type = 0
+display_template = "when take demage"
+code_template = "	act = Action.new()
+	sequence[\"take_demage\"] = act"
+defaults = {}
+signal_name = ""
+scope = ""

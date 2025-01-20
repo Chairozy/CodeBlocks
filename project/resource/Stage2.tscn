@@ -1,0 +1,131 @@
+[gd_scene load_steps=14 format=3 uid="uid://cuvyynt4u8v03"]
+
+[ext_resource type="Script" path="res://resource/Stage2.gd" id="1_u0i2j"]
+[ext_resource type="Texture2D" uid="uid://0vh3kl0t5ovl" path="res://resource/atlas_floor-16x16.png" id="2_uvo1q"]
+[ext_resource type="PackedScene" uid="uid://sr0uq1o0s4fe" path="res://resource/next.tscn" id="3_2ean5"]
+[ext_resource type="PackedScene" uid="uid://xuvl8pnkt8nw" path="res://resource/hero.tscn" id="3_orxao"]
+[ext_resource type="Script" path="res://block_code/block_code_node/block_code.gd" id="4_gj05t"]
+[ext_resource type="Script" path="res://block_code/serialization/block_serialization.gd" id="5_lmuhq"]
+[ext_resource type="Script" path="res://block_code/serialization/block_serialization_tree.gd" id="6_ixpco"]
+[ext_resource type="Script" path="res://block_code/serialization/block_script_serialization.gd" id="7_32b5w"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rd3yi"]
+texture = ExtResource("2_uvo1q")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ctyjt"]
+sources/0 = SubResource("TileSetAtlasSource_rd3yi")
+
+[sub_resource type="Resource" id="Resource_s3scy"]
+script = ExtResource("5_lmuhq")
+name = &"ready"
+children = Array[ExtResource("5_lmuhq")]([])
+arguments = {}
+
+[sub_resource type="Resource" id="Resource_m20cb"]
+script = ExtResource("6_ixpco")
+root = SubResource("Resource_s3scy")
+canvas_position = Vector2(54, 47)
+
+[sub_resource type="Resource" id="Resource_p5vju"]
+script = ExtResource("7_32b5w")
+script_inherits = "Hero"
+block_serialization_trees = Array[ExtResource("6_ixpco")]([SubResource("Resource_m20cb")])
+variables = Array[Resource("res://block_code/code_generation/variable_definition.gd")]([])
+generated_script = ""
+version = 0
+
+[node name="Stage2" type="Node2D"]
+script = ExtResource("1_u0i2j")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_ctyjt")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 65536, 0, 3, 0, 0, 65539, 0, 0, 131075, 65536, 0, 131076, 0, 0, 131077, 0, 0, 65541, 0, 0, 65542, 0, 0, 6, 131072, 1, 5, 262144, 2, 7, 196608, 1, 8, 65536, 2, 65544, 65536, 0, 131080, 131072, 0, 65545, 0, 0, 65546, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 131072, 1, 65548, 0, 0, 12, 393216, 1, 13, 0, 0, 14, 0, 2, 65550, 0, 1)
+
+[node name="Level1" type="Node2D" parent="."]
+visible = false
+
+[node name="2" parent="Level1" instance=ExtResource("3_2ean5")]
+position = Vector2(56, 8)
+
+[node name="Level2" type="Node2D" parent="."]
+visible = false
+
+[node name="3" parent="Level2" instance=ExtResource("3_2ean5")]
+position = Vector2(72, 40)
+
+[node name="Level3" type="Node2D" parent="."]
+visible = false
+
+[node name="4" parent="Level3" instance=ExtResource("3_2ean5")]
+position = Vector2(104, 8)
+
+[node name="Level4" type="Node2D" parent="."]
+visible = false
+
+[node name="5" parent="Level4" instance=ExtResource("3_2ean5")]
+position = Vector2(152, 24)
+
+[node name="Level5" type="Node2D" parent="."]
+visible = false
+
+[node name="6" parent="Level5" instance=ExtResource("3_2ean5")]
+position = Vector2(200, 40)
+
+[node name="Level6" type="Node2D" parent="."]
+visible = false
+
+[node name="Finish" parent="Level6" instance=ExtResource("3_2ean5")]
+position = Vector2(232, 24)
+
+[node name="Hero" parent="." instance=ExtResource("3_orxao")]
+position = Vector2(8, 8)
+
+[node name="BlockCode" type="Node" parent="Hero"]
+script = ExtResource("4_gj05t")
+block_script = SubResource("Resource_p5vju")

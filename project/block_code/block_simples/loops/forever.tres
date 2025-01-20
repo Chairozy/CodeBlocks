@@ -4,14 +4,15 @@
 
 [resource]
 script = ExtResource("1_msgpa")
-name = &"while"
+name = &"forever"
 target_node_class = ""
 description = "Run the connected blocks forever."
 category = "Loops"
 type = 4
 variant_type = 0
-display_template = "forever"
-code_template = "while true:"
+display_template = "<104,48,16,16>"
+code_template = "act.add_control(func(cl): return true, true)"
 defaults = {}
 signal_name = ""
 scope = ""
+extend_of = Array[StringName]([])

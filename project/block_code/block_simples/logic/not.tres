@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://db1kof7o12w78"]
+
+[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="1_n6and"]
+
+[resource]
+script = ExtResource("1_n6and")
+name = &"not"
+target_node_class = ""
+description = ""
+category = "Logic | Boolean"
+type = 3
+variant_type = 1
+display_template = "not {bool: BOOL}"
+code_template = "not {bool}"
+defaults = {}
+signal_name = ""
+scope = ""

@@ -2,7 +2,7 @@ extends Resource
 
 const Types = preload("res://block_code/types/types.gd")
 
-const FORMAT_STRING_PATTERN = "\\[(?<out_parameter>[^\\]]+)\\]|\\{(?<in_parameter>[^}]+)\\}|(?<label>[^\\{\\[]+)"
+const FORMAT_STRING_PATTERN = "\\<(?<icon>[^>]+)>|\\[(?<out_parameter>[^\\]]+)\\]|\\{(?<in_parameter>[^}]+)\\}|(?<label>[^\\{\\[\\<]+)"
 
 @export var name: StringName
 
@@ -26,6 +26,9 @@ const FORMAT_STRING_PATTERN = "\\[(?<out_parameter>[^\\]]+)\\]|\\{(?<in_paramete
 
 ## Empty except for blocks that have a defined scope
 @export var scope: String
+
+## The extend of the block 
+@export var extend_of: Array[StringName] = []
 
 @export var extension_script: GDScript
 
@@ -92,7 +95,10 @@ func get_output_parameters() -> Dictionary:
 static func parse_display_template(template_string: String):
 	var items: Array[Dictionary]
 	for regex_match in _display_template_regex.search_all(template_string):
-		if regex_match.names.has("label"):
+		if regex_match.names.has("icon"):
+			var icon_box := regex_match.get_string("icon")
+			items.append({"icon": icon_box})
+		elif regex_match.names.has("label"):
 			var label_string := regex_match.get_string("label")
 			items.append({"label": label_string})
 		elif regex_match.names.has("in_parameter"):

@@ -43,7 +43,7 @@ static func generate_script(ast_list: ASTList, block_script: BlockScriptSerializ
 
 	# Generate script extends statement
 	#var script := "extends %s\n\n" % block_script.script_inherits
-	var script: String = ("extends %s\n\nvar sequences := []\n\n" % block_script.script_inherits) if block_script.script_inherits else block_script.script_extends.script_template
+	var script: String = ("extends %s\n\n" % block_script.script_inherits) if block_script.script_inherits else block_script.script_extends.script_template
 
 	# Generate variables
 	for variable in block_script.variables:

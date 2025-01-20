@@ -1,0 +1,6 @@
+[gd_resource type="TileSet" format=3 uid="uid://cbgq0nb0j5in6"]
+
+[resource]
+resource_local_to_scene = true
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0

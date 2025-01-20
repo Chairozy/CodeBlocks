@@ -2,6 +2,7 @@
 class_name BlockCode
 extends Node
 
+const ScriptGenerator = preload("res://block_code/code_generation/script_generator.gd")
 @export var block_script: BlockScriptSerialization = null
 @export var is_preview := false
 
@@ -27,12 +28,14 @@ func _enter_tree():
 		new_block_script.script_inherits = _get_custom_or_native_class(get_parent())
 		new_block_script.generated_script = new_block_script.generated_script.replace("INHERIT_DEFAULT", new_block_script.script_inherits)
 		block_script = new_block_script
+	else:
+		block_script.generated_script = ScriptGenerator.generate_script(block_script.generate_ast_list(), block_script)
 
 func _update_parent_script():
 	var parent: Node = get_parent()
 	var script := GDScript.new()
 	parent.set_process(false)
-
+	print(block_script.generated_script)
 	script.set_source_code(block_script.generated_script)
 	script.reload()
 

@@ -19,20 +19,6 @@ const ZOOM_FACTOR: float = 1.1
 @onready var _window: Control = %Window
 @onready var _empty_box: BoxContainer = %EmptyBox
 
-@onready var _selected_node_box: BoxContainer = %SelectedNodeBox
-@onready var _selected_node_label: Label = %SelectedNodeBox/Label
-@onready var _selected_node_label_format: String = _selected_node_label.text
-
-@onready var _selected_node_with_block_code_box: BoxContainer = %SelectedNodeWithBlockCodeBox
-@onready var _selected_node_with_block_code_label: Label = %SelectedNodeWithBlockCodeBox/Label
-@onready var _selected_node_with_block_code_label_format: String = _selected_node_with_block_code_label.text
-
-@onready var _add_block_code_button: Button = %AddBlockCodeButton
-@onready var _open_scene_button: Button = %OpenSceneButton
-@onready var _replace_block_code_button: Button = %ReplaceBlockCodeButton
-
-@onready var _open_scene_icon = _open_scene_button.get_theme_icon("Load", "EditorIcons")
-
 @onready var _mouse_override: Control = %MouseOverride
 @onready var _zoom_button: Button = %ZoomButton
 
@@ -54,10 +40,6 @@ signal replace_block_code
 
 func _ready():
 	_context.changed.connect(_on_context_changed)
-
-	if not _open_scene_button.icon and not Util.node_is_part_of_edited_scene(self):
-		_open_scene_button.icon = _open_scene_icon
-
 
 func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
 	if _context.block_code_node == null or _context.parent_node == null:
@@ -142,11 +124,6 @@ func _on_context_changed():
 	_zoom_button.visible = false
 
 	_empty_box.visible = false
-	_selected_node_box.visible = false
-	_selected_node_with_block_code_box.visible = false
-	_add_block_code_button.disabled = true
-	_open_scene_button.disabled = true
-	_replace_block_code_button.disabled = true
 
 	if _context.block_script != null:
 		_load_block_script(_context.block_script)
@@ -157,20 +134,6 @@ func _on_context_changed():
 			reset_window_position()
 	elif edited_node == null:
 		_empty_box.visible = true
-	elif BlockCodePlugin.node_has_block_code(edited_node):
-		# If the selected node has a block code node, but BlockCodePlugin didn't
-		# provide it to block_script_selected, we assume the block code itself is not
-		# editable. In that case, provide options to either edit the node's
-		# scene file, or override the BlockCode node. This is mostly to avoid
-		# creating a situation where a node has multiple BlockCode nodes.
-		_selected_node_with_block_code_box.visible = true
-		_selected_node_with_block_code_label.text = _selected_node_with_block_code_label_format.format({"node": edited_node.name})
-		_open_scene_button.disabled = false if edited_node.scene_file_path else true
-		_replace_block_code_button.disabled = false
-	else:
-		_selected_node_box.visible = true
-		_selected_node_label.text = _selected_node_label_format.format({"node": edited_node.name})
-		_add_block_code_button.disabled = false
 
 	_current_block_script = _context.block_script
 
@@ -345,38 +308,14 @@ func release_scope():
 		block.modulate = Color.WHITE
 
 
-func _on_add_block_code_button_pressed():
-	_add_block_code_button.disabled = true
-
-	add_block_code.emit()
-
-
-func _on_open_scene_button_pressed():
-	_open_scene_button.disabled = true
-
-	open_scene.emit()
-
-
-func _on_replace_block_code_button_pressed():
-	_replace_block_code_button.disabled = true
-
-	replace_block_code.emit()
-
-
 func _gui_input(event):
-	if event is InputEventKey:
-		if event.keycode == KEY_SHIFT:
-			set_mouse_override(event.pressed)
-
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_MIDDLE:
 			if event.pressed and is_mouse_over():
 				_panning = true
 			else:
 				_panning = false
-
-		if event.button_index == MOUSE_BUTTON_MIDDLE:
-			set_mouse_override(event.pressed)
+			set_mouse_override(_panning)
 
 		var relative_mouse_pos := get_global_mouse_position() - get_global_rect().position
 
@@ -388,11 +327,11 @@ func _gui_input(event):
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and zoom > 0.2:
 				zoom /= ZOOM_FACTOR
 
-			_window.position -= (old_mouse_window_pos - canvas_to_window(relative_mouse_pos)) * zoom
+			#_window.position -= (old_mouse_window_pos - canvas_to_window(relative_mouse_pos)) * zoom
 
 	if event is InputEventMouseMotion:
-		if (Input.is_key_pressed(KEY_SHIFT) and _panning) or (Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE) and _panning):
-			_window.position += event.relative
+		if _panning or Input.is_key_pressed(KEY_SHIFT):
+			_window.position.y = mini(-22, _window.position.y + event.relative.y)
 
 
 func reset_window_position():

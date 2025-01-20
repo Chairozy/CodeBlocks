@@ -10,8 +10,11 @@ description = "Run the connected blocks [i]number[/i] times"
 category = "Loops"
 type = 4
 variant_type = 0
-display_template = "repeat {number: INT}"
-code_template = "for __i in {number}:"
+display_template = "<120,48,16,16> {number: INT}"
+code_template = "act.add_control(func(cl):
+	cl.count = {number}
+	return cl.is_loop(), true)"
 defaults = {}
 signal_name = ""
 scope = ""
+extend_of = Array[StringName]([])

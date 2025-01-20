@@ -55,14 +55,19 @@ class ASTNode:
 		var code_block := _get_code_block()
 		code_block = code_block.indent("\t".repeat(depth))
 
-		code += code_block + "\n"
+		if data.type != Types.BlockType.CONTROL or (data.type == Types.BlockType.CONTROL and not children.is_empty()):
+			code += code_block + "\n"
 
+		var inc_depth := 0 if data.type == Types.BlockType.CONTROL else 1
 		# fill empty entry and control blocks with pass
-		if children.is_empty() and (data.type == Types.BlockType.ENTRY || data.type == Types.BlockType.CONTROL):
-			code += "pass\n".indent("\t".repeat(depth + 1))
+		if children.is_empty() and (data.type == Types.BlockType.ENTRY):
+			code += "pass\n".indent("\t".repeat(depth + inc_depth))
 
 		for child in children:
-			code += child.get_code(depth + 1)
+			code += child.get_code(depth + inc_depth)
+		
+		if not children.is_empty() and data.type == Types.BlockType.CONTROL:
+			code += "act.remove_control()\n".indent("\t".repeat(depth + inc_depth))
 
 		return code
 

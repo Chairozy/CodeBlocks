@@ -1,7 +1,6 @@
 extends Area2D
 
 @export var is_preview := false
-signal standabled(node: Area2D)
 
 func _ready():
 	if is_preview:
