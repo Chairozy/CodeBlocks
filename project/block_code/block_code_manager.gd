@@ -1,16 +1,18 @@
 extends CanvasLayer
 class_name BlockCodeManager
 
+
 const MainPanelScene := preload("res://block_code/ui/main_panel.tscn")
 const MainPanel = preload("res://block_code/ui/main_panel.gd")
 const Types = preload("res://block_code/types/types.gd")
 const ScriptWindow := preload("res://block_code/ui/script_window/script_window.tscn")
 
 static var main_panel: MainPanel
-static var block_code_button: Button
 static var selected_block_code: BlockCode
 static var preview_scene: PreviewScene
 static var _instance: BlockCodeManager
+static var current_bnis: Array[int] = []
+
 
 const BlockInspectorPlugin := preload("res://block_code/inspector_plugin/block_script_inspector.gd")
 var block_inspector_plugin: BlockInspectorPlugin
@@ -36,16 +38,20 @@ func _enter_tree():
 func script_window_requested(script: String):
 	pass
 
+static func is_already() -> bool:
+	return is_instance_valid(_instance)
+
 static func run() -> void:
 	var canvas_scene := CanvasScene.get_instance()
 	preview_scene = canvas_scene.create_preview()
-	canvas_scene.hide()
-	_instance.get_parent().get_node("Stage").add_child(preview_scene, true)
+	canvas_scene.get_parent().remove_child(canvas_scene)
+	_instance.get_parent().add_child(preview_scene, true)
 
 static func stop() -> void:
 	var canvas_scene := CanvasScene.get_instance()
-	preview_scene.queue_free()
-	canvas_scene.show()
+	if is_instance_valid(preview_scene):
+		preview_scene.get_parent().add_child(canvas_scene, true)
+		preview_scene.queue_free()
 
 func _ready():
 	main_panel = MainPanelScene.instantiate()
@@ -126,7 +132,6 @@ static func node_has_block_code(node: Node, recursive: bool = false) -> bool:
 
 static func list_block_code_nodes_for_node(node: Node, recursive: bool = false) -> Array[BlockCode]:
 	var result: Array[BlockCode] = []
-
 	if node is BlockCode:
 		result.append(node)
 	elif node:

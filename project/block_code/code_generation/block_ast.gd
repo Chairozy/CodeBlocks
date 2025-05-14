@@ -36,6 +36,7 @@ class IDHandler:
 
 
 class ASTNode:
+	var block_node_id
 	var data  #: BlockDefinition
 	var children: Array[ASTNode]
 	var arguments: Dictionary  # String, ASTValueNode
@@ -45,7 +46,7 @@ class ASTNode:
 		arguments = {}
 
 	func _get_code_block() -> String:
-		var code_block: String = BlockAST.format_code_template(data.code_template, arguments)
+		var code_block: String = BlockAST.format_code_template(data.code_template, arguments, block_node_id)
 		return IDHandler.make_unique(code_block)
 
 	func get_code(depth: int) -> String:
@@ -70,6 +71,12 @@ class ASTNode:
 			code += "act.remove_control()\n".indent("\t".repeat(depth + inc_depth))
 
 		return code
+	
+	func get_block_code_sizes() -> int:
+		var count := 1
+		for child in children:
+			count += child.get_block_code_sizes()
+		return count
 
 
 class ASTValueNode:
@@ -102,7 +109,9 @@ func to_string_recursive(node: ASTNode, depth: int) -> String:
 	return string
 
 
-static func format_code_template(code_template: String, arguments: Dictionary) -> String:
+static func format_code_template(code_template: String, arguments: Dictionary, block_node_id = null) -> String:
+	code_template = code_template.replace("{{{%s}}}" % "bni", str(block_node_id))
+	
 	for argument_name in arguments:
 		# Use parentheses to be safe
 		var argument_value: Variant = arguments[argument_name]

@@ -23,7 +23,7 @@ var parent_block: Block
 
 func _set_color(new_color):
 	color = new_color
-	outline_color = color.darkened(0.2)
+	outline_color = color.darkened(Constants.COLOR_DARKNED)
 	queue_redraw()
 
 
@@ -137,6 +137,10 @@ func _draw():
 	else:
 		edge_polygon.append(Vector2(0.0, size.y + outline_middle))
 
-	draw_colored_polygon(fill_polygon, color)
-	draw_polyline(stroke_polygon, Constants.FOCUS_BORDER_COLOR if parent_block.has_focus() else outline_color, Constants.OUTLINE_WIDTH)
-	draw_polyline(edge_polygon, Constants.FOCUS_BORDER_COLOR if parent_block.has_focus() else outline_color, Constants.OUTLINE_WIDTH)
+	draw_colored_polygon(fill_polygon, Constants.EXEC_BORDER_COLOR if parent_block._hightlight else color)
+	if parent_block._outlight:
+		draw_polyline(stroke_polygon, Constants.EXEC_BORDER_COLOR, Constants.OUTLINE_WIDTH)
+		draw_polyline(edge_polygon, Constants.EXEC_BORDER_COLOR, Constants.OUTLINE_WIDTH)
+	else:
+		draw_polyline(stroke_polygon, Constants.FOCUS_BORDER_COLOR if parent_block.has_focus() else outline_color, Constants.OUTLINE_WIDTH)
+		draw_polyline(edge_polygon, Constants.FOCUS_BORDER_COLOR if parent_block.has_focus() else outline_color, Constants.OUTLINE_WIDTH)

@@ -11,11 +11,27 @@ config_version=5
 [application]
 
 config/name="CodeBlocks"
-run/main_scene="res://game.tscn"
+run/main_scene="res://Cover.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://icon.svg"
+
+[autoload]
+
+Game="*res://Game.gd"
+
+[gui]
+
+theme/custom="res://resource/default_theme.tres"
+theme/custom_font="res://resource/fonts/Pixellari.ttf"
+common/default_theme_scale=3.0
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+
+[sprout_lands_tilemap]
+
+disable_plugin_dialogues=true
+copy_path="res://example"

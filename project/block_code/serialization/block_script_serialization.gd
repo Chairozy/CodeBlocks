@@ -8,7 +8,6 @@ const BlockDefinition = preload("res://block_code/code_generation/block_definiti
 const BlocksCatalog = preload("res://block_code/code_generation/blocks_catalog.gd")
 const CategoryFactory = preload("res://block_code/ui/picker/categories/category_factory.gd")
 const Types = preload("res://block_code/types/types.gd")
-const VariableDefinition = preload("res://block_code/code_generation/variable_definition.gd")
 
 const SCENE_PER_TYPE = {
 	Types.BlockType.ENTRY: preload("res://block_code/ui/blocks/entry_block/entry_block.tscn"),
@@ -264,4 +263,6 @@ func _value_from_ast_value(ast_node: BlockAST.ASTValueNode) -> ValueBlockSeriali
 		value.arguments[arg_name] = argument
 
 	return value
-	
+
+func free():
+	super.free()

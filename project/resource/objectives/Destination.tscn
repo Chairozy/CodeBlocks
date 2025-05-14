@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://ciyrui61oxy5w"]
+
+[ext_resource type="Script" path="res://resource/scripts/AnimatedTextureRect.gd" id="1_c41qp"]
+[ext_resource type="Texture2D" uid="uid://qw28hiafk4jc" path="res://resource/objectives/objectives.png" id="2_p0k25"]
+
+[sub_resource type="Image" id="Image_5u7m2"]
+data = {
+"data": PackedByteArray(255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 0, 255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 0, 255, 216, 110, 255, 255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 255, 255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 255, 255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 0),
+"format": "RGBA8",
+"height": 4,
+"mipmaps": false,
+"width": 4
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_0fuu4"]
+image = SubResource("Image_5u7m2")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0rlv"]
+atlas = ExtResource("2_p0k25")
+region = Rect2(96, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xy65d"]
+atlas = ExtResource("2_p0k25")
+region = Rect2(100, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebx25"]
+atlas = ExtResource("2_p0k25")
+region = Rect2(104, 0, 4, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nseb0"]
+atlas = ExtResource("2_p0k25")
+region = Rect2(108, 0, 4, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hg8m4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0rlv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xy65d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebx25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nseb0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8j5rj"]
+size = Vector2(8, 8)
+
+[node name="Destination" type="Area2D"]
+
+[node name="AnimatedTextureRect" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.752941)
+clip_children = 2
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = SubResource("ImageTexture_0fuu4")
+stretch_mode = 1
+script = ExtResource("1_c41qp")
+sprites = SubResource("SpriteFrames_hg8m4")
+auto_play = true
+playing = true
+
+[node name="TextureRect" type="TextureRect" parent="AnimatedTextureRect"]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+stretch_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8j5rj")

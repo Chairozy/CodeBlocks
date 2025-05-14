@@ -11,7 +11,7 @@ const ParameterInput = preload("res://block_code/ui/blocks/utilities/parameter_i
 const ParameterInputScene = preload("res://block_code/ui/blocks/utilities/parameter_input/parameter_input.tscn")
 const ParameterOutput = preload("res://block_code/ui/blocks/utilities/parameter_output/parameter_output.gd")
 const ParameterOutputScene = preload("res://block_code/ui/blocks/utilities/parameter_output/parameter_output.tscn")
-
+const TEXTURE_SIZE = 16
 ## A string describing a block's display format. For example:
 ## [br]
 ## [code]
@@ -106,13 +106,13 @@ func _append_icon(icon: String):
 	texture_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	texture_rect.texture = AtlasTexture.new()
 	texture_rect.texture.atlas = load("res://resource/UI.png")
-	texture_rect.texture.region = Rect2(float(params[0]), float(params[1]), float(params[2]), float(params[3]))
+	texture_rect.texture.region = Rect2(float(int(params[0]) * TEXTURE_SIZE), float(int(params[1]) * TEXTURE_SIZE), float(TEXTURE_SIZE), float(TEXTURE_SIZE))
 	_container.add_child(texture_rect)
 
 
 func _append_label(label_format: String):
 	var label = Label.new()
-	label.add_theme_color_override("font_color", Color.WHITE)
+	label.add_theme_color_override("font_color", Color("333333"))
 	label.text = label_format.strip_edges()
 	_container.add_child(label)
 

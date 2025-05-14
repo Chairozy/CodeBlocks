@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bug80nqysq0jd"]
+
+[ext_resource type="Texture2D" uid="uid://iruy6yf0dmyh" path="res://resource/tiles/sunnys_tiles.png" id="1_4nyto"]
+
+[sub_resource type="GDScript" id="GDScript_nwxlh"]
+script/source = "extends StaticBody2D
+
+var open: bool = false:
+	set(value):
+		open = value
+		$Sprite2D.frame = int(value)
+		process_mode = Node.PROCESS_MODE_DISABLED if value else PROCESS_MODE_INHERIT
+	get:
+		return open
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcbtx"]
+size = Vector2(2, 16)
+
+[node name="VerticalGate" type="StaticBody2D"]
+collision_mask = 0
+script = SubResource("GDScript_nwxlh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4nyto")
+vframes = 2
+region_enabled = true
+region_rect = Rect2(752, 48, 16, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tcbtx")

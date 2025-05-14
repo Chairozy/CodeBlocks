@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bn7nqt4bo3y4q"]
+
+[ext_resource type="TileSet" uid="uid://cbjfd7qa6l066" path="res://resource/stages/Tile.tres" id="1_11fi6"]
+[ext_resource type="Script" path="res://resource/stages/Stage03.gd" id="2_ubqch"]
+[ext_resource type="PackedScene" uid="uid://belt1met7uwlq" path="res://resource/characters/character.tscn" id="3_pyfba"]
+[ext_resource type="Script" path="res://block_code/block_code_node/block_code.gd" id="4_fvotu"]
+[ext_resource type="Resource" uid="uid://clnyvbhv6su1" path="res://resource/characters/CharBlockCode.tres" id="5_hp2se"]
+[ext_resource type="PackedScene" uid="uid://bspylbwx4hxo6" path="res://resource/objectives/Goal.tscn" id="6_n8pkk"]
+
+[node name="Stage14" type="TileMap"]
+tile_set = ExtResource("1_11fi6")
+format = 2
+layer_0/name = "BelowLand"
+layer_0/tile_data = PackedInt32Array(196609, 851969, 5, 65539, 786433, 6)
+layer_1/name = "Land"
+layer_1/tile_data = PackedInt32Array(131073, 327681, 14, 65538, 458753, 12, 196610, 327681, 14, 196609, 786433, 4, 131074, 131073, 13, 65537, 65537, 12, 131072, 851969, 5, 1, 786433, 6, 196608, 851969, 4, 3, 720897, 6, 2, 786433, 6, 0, 851969, 6, 65536, 851969, 5, 131075, 458753, 12, 65539, 720897, 5, 196611, 196609, 14, 262146, 786433, 4, 262147, 786433, 4, 262145, 851969, 4, 262148, 720897, 4, 196612, 720897, 5, 131076, 720897, 5)
+layer_2/name = "Fence"
+layer_2/tile_data = PackedInt32Array(65537, 2490369, 4, 65538, 2621441, 1, 131074, 2686977, 3)
+layer_3/name = "Prop"
+layer_3/tile_data = PackedInt32Array(131075, 2097153, 10)
+script = ExtResource("2_ubqch")
+blocks_limit = 10
+star1 = true
+star2 = true
+
+[node name="Character" parent="." instance=ExtResource("3_pyfba")]
+position = Vector2(24, 24)
+direction = Vector2(1, 0)
+
+[node name="BlockCode" type="Node" parent="Character"]
+script = ExtResource("4_fvotu")
+block_script = ExtResource("5_hp2se")
+custom_catalogs = Array[StringName]([&"move_forward", &"rotate_left", &"rotate_right"])
+
+[node name="Goal" parent="." instance=ExtResource("6_n8pkk")]
+position = Vector2(56, 40)
+
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

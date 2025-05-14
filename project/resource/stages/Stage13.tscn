@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnwv4wes3s110"]
+
+[ext_resource type="TileSet" uid="uid://cbjfd7qa6l066" path="res://resource/stages/Tile.tres" id="1_8le8c"]
+[ext_resource type="Script" path="res://resource/stages/Stage03.gd" id="2_apw32"]
+[ext_resource type="PackedScene" uid="uid://belt1met7uwlq" path="res://resource/characters/character.tscn" id="3_ufghh"]
+[ext_resource type="Script" path="res://block_code/block_code_node/block_code.gd" id="4_1lkwc"]
+[ext_resource type="Resource" uid="uid://clnyvbhv6su1" path="res://resource/characters/CharBlockCode.tres" id="5_3qbvq"]
+[ext_resource type="PackedScene" uid="uid://bspylbwx4hxo6" path="res://resource/objectives/Goal.tscn" id="6_1dir3"]
+
+[node name="Stage13" type="TileMap"]
+tile_set = ExtResource("1_8le8c")
+format = 2
+layer_0/name = "BelowLand"
+layer_0/tile_data = PackedInt32Array(196609, 851969, 5)
+layer_1/name = "Land"
+layer_1/tile_data = PackedInt32Array(131073, 327681, 14, 65538, 458753, 12, 196610, 524289, 14, 196609, 786433, 4, 131074, 196609, 13, 65537, 65537, 12, 131072, 851969, 5, 1, 786433, 6, 196608, 851969, 4, 3, 720897, 6, 2, 786433, 6, 0, 851969, 6, 65536, 851969, 5, 131075, 720897, 5, 65539, 720897, 5, 196611, 720897, 5, 262146, 786433, 4, 262147, 720897, 4, 262145, 851969, 4)
+layer_2/name = "Fence"
+layer_2/tile_data = PackedInt32Array(65537, 2490369, 4, 65538, 2621441, 4)
+layer_3/name = "Prop"
+layer_3/tile_data = PackedInt32Array(65538, 2162689, 9)
+script = ExtResource("2_apw32")
+blocks_limit = 8
+star1 = true
+star2 = true
+
+[node name="Character" parent="." instance=ExtResource("3_ufghh")]
+position = Vector2(40, 56)
+direction = Vector2(-1, 0)
+
+[node name="BlockCode" type="Node" parent="Character"]
+script = ExtResource("4_1lkwc")
+block_script = ExtResource("5_3qbvq")
+custom_catalogs = Array[StringName]([&"move_forward", &"rotate_left", &"rotate_right"])
+
+[node name="Goal" parent="." instance=ExtResource("6_1dir3")]
+position = Vector2(40, 24)
+
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

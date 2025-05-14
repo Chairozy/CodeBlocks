@@ -5,6 +5,8 @@ extends Node
 const ScriptGenerator = preload("res://block_code/code_generation/script_generator.gd")
 @export var block_script: BlockScriptSerialization = null
 @export var is_preview := false
+@export var custom_catalogs: Array[StringName] = []
+@export var custom_persist_properties: Dictionary = {}
 
 func _get_custom_or_native_class(node: Node):
 	if node.has_method("get_custom_class"):
@@ -17,6 +19,7 @@ func _ready():
 		queue_free()
 	else:
 		is_preview = true
+		BlockCodeManager.main_panel._title_bar.add_node_item_options(self)
 
 func _enter_tree():
 	if is_preview:
@@ -35,12 +38,11 @@ func _update_parent_script():
 	var parent: Node = get_parent()
 	var script := GDScript.new()
 	parent.set_process(false)
-	print(block_script.generated_script)
 	script.set_source_code(block_script.generated_script)
 	script.reload()
 
 	# Persist export script variables (like SimpleCharacter exported texture)
-	var persist_properties = {}
+	var persist_properties = custom_persist_properties.duplicate()
 	var old_property_list = parent.get_property_list()
 	for property in old_property_list:
 		if property.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:

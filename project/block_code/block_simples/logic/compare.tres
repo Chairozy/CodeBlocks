@@ -25,3 +25,5 @@ defaults = {
 }
 signal_name = ""
 scope = ""
+extend_of = Array[StringName]([])
+block_node_id = 0

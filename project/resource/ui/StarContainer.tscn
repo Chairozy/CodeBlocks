@@ -1,0 +1,223 @@
+[gd_scene load_steps=12 format=3 uid="uid://dtpvb6efyun6v"]
+
+[ext_resource type="Texture2D" uid="uid://1f2uib1sm35t" path="res://resource/ui/Sprite sheet for Basic Pack.png" id="1_fbv15"]
+[ext_resource type="Script" path="res://resource/ui/StarContainer.gd" id="2_n6asf"]
+[ext_resource type="Texture2D" uid="uid://qw28hiafk4jc" path="res://resource/objectives/objectives.png" id="3_ctd11"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbicr"]
+atlas = ExtResource("1_fbv15")
+region = Rect2(560, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv657"]
+atlas = ExtResource("3_ctd11")
+region = Rect2(0, 16, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oq20o"]
+atlas = ExtResource("1_fbv15")
+region = Rect2(628, 83, 7, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x72ct"]
+resource_local_to_scene = true
+atlas = ExtResource("1_fbv15")
+region = Rect2(528, 65, 1, 16)
+
+[sub_resource type="Animation" id="Animation_xio66"]
+resource_name = "Fill"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(0.120742, 1),
+"update": 2,
+"values": [Vector2(0.1, 0.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Light:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pr02s"]
+resource_name = "Fill"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FillStar:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.5, 0.7, 0.9, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(528, 65, 1, 16), Rect2(528, 65, 5, 16), Rect2(528, 65, 7, 16), Rect2(528, 65, 9, 16), Rect2(528, 65, 11, 16), Rect2(528, 65, 13, 16), Rect2(528, 65, 16, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9, 1, 1.4),
+"transitions": PackedFloat32Array(0.120742, 1, 0.5, 1),
+"update": 2,
+"values": [Vector2(0.1, 0.1), Vector2(1, 1), Vector2(1.5, 1.5), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Light:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.1, 1.4),
+"transitions": PackedFloat32Array(0.378929, 3.73213, 2.82843, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.576471), Color(1, 1, 1, 0.145098), Color(1, 1, 1, 1), Color(1, 1, 1, 0.203922)]
+}
+
+[sub_resource type="Animation" id="Animation_li6rs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FillStar:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(528, 65, 1, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Light:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.576471)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sfwsk"]
+_data = {
+"Fail": SubResource("Animation_xio66"),
+"Fill": SubResource("Animation_pr02s"),
+"RESET": SubResource("Animation_li6rs")
+}
+
+[node name="StarContainer" type="TextureRect"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+scale = Vector2(0.1, 0.1)
+pivot_offset = Vector2(8, 8)
+texture = SubResource("AtlasTexture_kbicr")
+stretch_mode = 4
+script = ExtResource("2_n6asf")
+
+[node name="Light" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.576471)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_rv657")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(8.00001, 8)
+emitting = false
+amount = 12
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.75
+randomness = 1.0
+lifetime_randomness = 0.25
+fract_delta = false
+local_coords = true
+texture = SubResource("AtlasTexture_oq20o")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 40.0
+angle_max = 360.0
+scale_amount_min = 0.3
+scale_amount_max = 0.75
+color = Color(1, 1, 0.482353, 0.729412)
+
+[node name="FillStar" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_x72ct")
+stretch_mode = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sfwsk")
+}

@@ -18,14 +18,26 @@ class PromiseAll:
 		if completed_signals != size:
 			await completed
 
+static var _instance: PreviewScene
+
+static func get_instance() -> PreviewScene:
+	return _instance
+
+func _enter_tree() -> void:
+	_instance = self
+
 var actors := {}
 var turns := []
+var play := false
 
 func _ready():
 	for actor_name in actors:
 		for actor in actors[actor_name]:
 			actor.start()
-	call_deferred(&"start")
+	Callable(func():
+		play = true
+		start()
+		).call_deferred()
 
 func start():
 	for actor_name in actors:
@@ -34,8 +46,14 @@ func start():
 	while not turns.is_empty():
 		var turn = turns.pop_back()
 		await turn.exec()
-	await get_tree().create_timer(0.01).timeout
-	call_deferred(&"start")
+	if get_tree():
+		await get_tree().create_timer(0.01).timeout
+		if play:
+			call_deferred(&"start")
+		
+
+func pause():
+	play = false
 
 func append_actor(node, node_name: String = ""):
 	if not actors.has(node_name):

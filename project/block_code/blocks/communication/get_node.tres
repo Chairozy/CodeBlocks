@@ -24,4 +24,5 @@ defaults = {
 }
 signal_name = ""
 scope = ""
+extend_of = Array[StringName]([])
 extension_script = ExtResource("1_we5wl")

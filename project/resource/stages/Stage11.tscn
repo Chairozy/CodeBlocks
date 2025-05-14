@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://djomagaiifk52"]
+
+[ext_resource type="TileSet" uid="uid://cbjfd7qa6l066" path="res://resource/stages/Tile.tres" id="1_l60jv"]
+[ext_resource type="Script" path="res://resource/stages/Stage03.gd" id="2_jf30v"]
+[ext_resource type="PackedScene" uid="uid://belt1met7uwlq" path="res://resource/characters/character.tscn" id="3_74eyt"]
+[ext_resource type="Script" path="res://block_code/block_code_node/block_code.gd" id="4_jv52b"]
+[ext_resource type="Resource" uid="uid://clnyvbhv6su1" path="res://resource/characters/CharBlockCode.tres" id="5_gcep8"]
+[ext_resource type="PackedScene" uid="uid://bspylbwx4hxo6" path="res://resource/objectives/Goal.tscn" id="6_xlc14"]
+
+[node name="Stage11" type="TileMap"]
+tile_set = ExtResource("1_l60jv")
+format = 2
+layer_0/name = "BelowLand"
+layer_0/tile_data = PackedInt32Array(131072, 786433, 4)
+layer_1/name = "Land"
+layer_1/tile_data = PackedInt32Array(131073, 327681, 14, 65538, 458753, 12, 196610, 786433, 4, 131075, 720897, 5, 196609, 786433, 4, 131074, 196609, 14, 65537, 131073, 12, 65539, 720897, 5, 196611, 720897, 4, 131072, 851969, 5, 65536, 327681, 15, 0, 786433, 6, 1, 786433, 6, 196608, 851969, 4, 3, 720897, 6, 2, 786433, 6, 196607, 851969, 4, 131071, 851969, 5, 65535, 851969, 6)
+layer_2/name = "Fence"
+layer_2/tile_data = PackedInt32Array(65537, 2686977, 4)
+layer_3/name = "Prop"
+layer_3/tile_data = PackedInt32Array(65536, 2162689, 10)
+script = ExtResource("2_jf30v")
+blocks_limit = 5
+star1 = true
+star2 = true
+
+[node name="Character" parent="." instance=ExtResource("3_74eyt")]
+position = Vector2(40, 40)
+direction = Vector2(-1, 0)
+
+[node name="BlockCode" type="Node" parent="Character"]
+script = ExtResource("4_jv52b")
+block_script = ExtResource("5_gcep8")
+custom_catalogs = Array[StringName]([&"move_forward", &"rotate_left", &"rotate_right"])
+
+[node name="Goal" parent="." instance=ExtResource("6_xlc14")]
+position = Vector2(8, 24)
+
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

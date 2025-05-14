@@ -85,19 +85,27 @@ static var _catalog: Dictionary
 
 static func _setup_definitions_from_files():
 	#var definition_files = Util.get_files_in_dir_recursive(_BLOCKS_PATH, "*.tres")
-	var definition_files := [
-		"lifecycle/ready.tres",
-		"lifecycle/when_demaged.tres",
-		"motions/move_right.tres",
-		"motions/move_down.tres",
-		"motions/move_left.tres",
-		"motions/move_up.tres",
-		"loops/for.tres",
-		"loops/forever.tres",
-		"logic/if.tres",
-		"logic/else_if.tres",
-		"logic/else.tres",
-	]
+	var definition_files = []
+	if definition_files.size() == 0:
+		definition_files = [
+			"lifecycle/ready.tres",
+			#"lifecycle/when_demaged.tres",
+			"motions/move_forward.tres",
+			"motions/rotate_right.tres",
+			"motions/rotate_left.tres",
+			"motions/move_right.tres",
+			"motions/move_down.tres",
+			"motions/move_left.tres",
+			"motions/move_up.tres",
+			"loops/for.tres",
+			"loops/forever.tres",
+			"logic/if.tres",
+			"logic/else_if.tres",
+			"logic/else.tres",
+		]
+	else:
+		definition_files.append("lifecycle/ready.tres")
+
 	for file in definition_files:
 		var block_definition: BlockDefinition = load(_BLOCKS_PATH + file)
 		_catalog[block_definition.name] = block_definition
@@ -175,8 +183,8 @@ static func _setup_properties_for_class():
 
 
 static func setup():
-	if _catalog:
-		return
+	#if _catalog:
+		#return
 	_catalog = {}
 	_setup_definitions_from_files()
 	#_setup_properties_for_class()

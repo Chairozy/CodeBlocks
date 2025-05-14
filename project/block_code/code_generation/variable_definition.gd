@@ -1,3 +1,4 @@
+class_name VariableDefinition
 extends Resource
 
 @export var var_name: String

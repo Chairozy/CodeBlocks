@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dflsm5cwqynrp"]
+
+[ext_resource type="Texture2D" uid="uid://1f2uib1sm35t" path="res://resource/ui/Sprite sheet for Basic Pack.png" id="1_nar5c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t82su"]
+atlas = ExtResource("1_nar5c")
+region = Rect2(800, 176, 16, 16)
+
+[node name="NextNode" type="Button"]
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(16, 16)
+icon = SubResource("AtlasTexture_t82su")
+icon_alignment = 1
+expand_icon = true

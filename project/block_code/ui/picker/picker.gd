@@ -75,6 +75,12 @@ func _update_block_components():
 		if category.name == "Lifecycle":
 			continue
 		var block_definitions := _context.block_script.get_blocks_in_category(category)
+		if _context.block_code_node.custom_catalogs.size() > 0:
+			block_definitions = block_definitions.filter(func(def):
+				return _context.block_code_node.custom_catalogs.has(def.name)
+				)
+		if block_definitions.is_empty():
+			continue
 		var order_override = CATEGORY_ORDER_OVERRIDE.get(category.name)
 		if order_override:
 			block_definitions.sort_custom(_sort_blocks_by_list_order.bind(order_override))

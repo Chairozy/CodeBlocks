@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://waft44fm5yst"]
+
+[ext_resource type="PackedScene" uid="uid://ciyrui61oxy5w" path="res://resource/objectives/Destination.tscn" id="1_f1sx2"]
+[ext_resource type="Texture2D" uid="uid://iruy6yf0dmyh" path="res://resource/tiles/sunnys_tiles.png" id="2_17ijt"]
+
+[sub_resource type="Image" id="Image_nq3hh"]
+data = {
+"data": PackedByteArray(255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 0, 255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 0, 255, 216, 110, 255, 255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 255, 255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 255, 255, 216, 110, 255, 255, 216, 110, 0, 255, 216, 110, 0),
+"format": "RGBA8",
+"height": 4,
+"mipmaps": false,
+"width": 4
+}
+
+[sub_resource type="ImageTexture" id="ImageTexture_7laso"]
+image = SubResource("Image_nq3hh")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78chl"]
+atlas = ExtResource("2_17ijt")
+region = Rect2(448, 112, 16, 16)
+
+[node name="Destination" instance=ExtResource("1_f1sx2")]
+
+[node name="AnimatedTextureRect" parent="." index="0"]
+texture = SubResource("ImageTexture_7laso")
+frame_index = 0
+
+[node name="TextureRect" parent="AnimatedTextureRect" index="0"]
+layout_mode = 0
+texture = SubResource("AtlasTexture_78chl")

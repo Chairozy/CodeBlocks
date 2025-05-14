@@ -10,17 +10,22 @@ const Util = preload("res://block_code/ui/util.gd")
 
 const EXTEND_MARGIN: float = 800
 const BLOCK_AUTO_PLACE_MARGIN: Vector2 = Vector2(25, 8)
-const DEFAULT_WINDOW_MARGIN: Vector2 = Vector2(25, 25)
+const DEFAULT_WINDOW_MARGIN: Vector2 = Vector2(45, 0) #45 , 40
+const DEFAULT_MARGIN_CONTAINER: Vector2 = Vector2(32, 32) #45 , 40
 const SNAP_GRID: Vector2 = Vector2(25, 25)
 const ZOOM_FACTOR: float = 1.1
 
 @onready var _context := BlockEditorContext.get_default()
 
 @onready var _window: Control = %Window
+@onready var _window_container: Control = %WindowContainer
+@onready var _vscroll_bar: VScrollBar = %VScrollBar
+
 @onready var _empty_box: BoxContainer = %EmptyBox
 
-@onready var _mouse_override: Control = %MouseOverride
 @onready var _zoom_button: Button = %ZoomButton
+@onready var _top_button: Button = %TopButton
+
 
 var _current_block_script: BlockScriptSerialization
 var _current_ast_list: ASTList
@@ -31,6 +36,12 @@ var zoom: float:
 		_zoom_button.text = "%.1fx" % value
 	get:
 		return _window.scale.x
+
+var disable_access: bool:
+	set(value):
+		%MouseOverride.mouse_filter = MOUSE_FILTER_STOP if value else MOUSE_FILTER_IGNORE
+
+var block_rect := Rect2(Vector2.ZERO, Vector2.ZERO)
 
 signal reconnect_block(block: Block)
 signal add_block_code
@@ -79,12 +90,13 @@ func _drop_data(at_position: Vector2, data: Variant) -> void:
 	add_block(block, at_position)
 	reconnect_block.emit(block)
 
-
-func add_block(block: Block, position: Vector2 = Vector2.ZERO) -> void:
+func add_block(block: Block, pos: Vector2 = Vector2.ZERO) -> void:
+	pos.y = max(DEFAULT_MARGIN_CONTAINER.y + DEFAULT_WINDOW_MARGIN.y, pos.y)
+	pos.x = max(DEFAULT_MARGIN_CONTAINER.x + DEFAULT_WINDOW_MARGIN.x, pos.x)
 	if block is EntryBlock:
-		block.position = canvas_to_window(position).snapped(SNAP_GRID)
+		block.position = canvas_to_window(pos).snapped(SNAP_GRID)
 	else:
-		block.position = canvas_to_window(position)
+		block.position = canvas_to_window(pos)
 
 	_window.add_child(block)
 
@@ -122,16 +134,18 @@ func _on_context_changed():
 
 	_window.visible = false
 	_zoom_button.visible = false
+	_top_button.visible = false
 
 	_empty_box.visible = false
 
 	if _context.block_script != null:
 		_load_block_script(_context.block_script)
 		_window.visible = true
-		_zoom_button.visible = true
+		#_zoom_button.visible = true
+		_top_button.visible = true
 
-		if _context.block_script != _current_block_script:
-			reset_window_position()
+		#if _context.block_script != _current_block_script:
+		reset_window_position()
 	elif edited_node == null:
 		_empty_box.visible = true
 
@@ -225,6 +239,7 @@ func rebuild_ast_list():
 func build_ast(block: Block) -> BlockAST.ASTNode:
 	var ast_node := BlockAST.ASTNode.new()
 	ast_node.data = block.definition
+	ast_node.block_node_id = block.get_instance_id()
 
 	var parameter_values := block.get_parameter_values()
 
@@ -315,60 +330,101 @@ func _gui_input(event):
 				_panning = true
 			else:
 				_panning = false
-			set_mouse_override(_panning)
 
-		var relative_mouse_pos := get_global_mouse_position() - get_global_rect().position
+		#var relative_mouse_pos := get_global_mouse_position() - get_global_rect().position
 
-		if is_mouse_over():
-			var old_mouse_window_pos := canvas_to_window(relative_mouse_pos)
-
-			if event.button_index == MOUSE_BUTTON_WHEEL_UP and zoom < 2:
-				zoom *= ZOOM_FACTOR
-			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and zoom > 0.2:
-				zoom /= ZOOM_FACTOR
+		#if is_mouse_over():
+			#var old_mouse_window_pos := canvas_to_window(relative_mouse_pos)
+#
+			#if event.button_index == MOUSE_BUTTON_WHEEL_UP and zoom < 2:
+				#zoom *= ZOOM_FACTOR
+			#if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and zoom > 0.2:
+				#zoom /= ZOOM_FACTOR
 
 			#_window.position -= (old_mouse_window_pos - canvas_to_window(relative_mouse_pos)) * zoom
 
 	if event is InputEventMouseMotion:
 		if _panning or Input.is_key_pressed(KEY_SHIFT):
-			_window.position.y = mini(-22, _window.position.y + event.relative.y)
+			var range = block_rect_range()
+			_window.position.y = clampi(_window.position.y + event.relative.y, range.min, range.max)
+			_update_vscroll(_window.position.y, range.min, range.max)
 
-
-func reset_window_position():
+func blocks_rect() -> Rect2:
 	var blocks = get_blocks()
 	var top_left: Vector2 = Vector2.INF
-
+	var bottom_right: Vector2 = Vector2.ZERO
+	
 	for block in blocks:
 		if block.position.x < top_left.x:
 			top_left.x = block.position.x
 		if block.position.y < top_left.y:
 			top_left.y = block.position.y
-
+		if block.position.x + block.size.x > bottom_right.x:
+			bottom_right.x = block.position.x + block.size.x
+		if block.position.y + block.size.y > bottom_right.y:
+			bottom_right.y = block.position.y + block.size.y
+	
 	if top_left == Vector2.INF:
 		top_left = Vector2.ZERO
 
-	_window.position = (-top_left + DEFAULT_WINDOW_MARGIN) * zoom
+	return Rect2(top_left, bottom_right - top_left)
 
+func block_rect_range():
+	var canvas_height = _window_container.size.y - 200
+	var max_value = -block_rect.position.y
+	var min_value = mini(max_value, canvas_height - block_rect.end.y)
+	return {"min": min_value, "max":max_value, "canvas_height": canvas_height}
+
+func update_vscroll():
+	block_rect = blocks_rect()
+	var range = block_rect_range()
+	_update_vscroll(_window.position.y, range.min, range.max)
+
+func _get_position_by_parent_block(node: Node):
+	var pos = node.position
+	var parent = node.get_parent()
+	pos += parent.position
+	while parent and not parent is EntryBlock:
+		parent = parent.get_parent()
+		pos += parent.position
+	return pos
+	
+func scroll_to_block(block):
+	var pos_y = _get_position_by_parent_block(block).y
+	var range = block_rect_range()
+	var canvas_mid = range.canvas_height / 2
+	create_tween().tween_method(func(val):
+		_window.position.y = val
+		_vscroll_bar.value = ceili((abs(_window.position.y) / _vscroll_bar.max_value) * (_vscroll_bar.max_value - _vscroll_bar.page))
+		, _window.position.y, clampi(canvas_mid - pos_y, range.min, range.max), 0.3)
+	
+
+func _update_vscroll(value, min_value, max_value):
+	_vscroll_bar.min_value = abs(max_value)
+	_vscroll_bar.max_value = abs(min_value)
+	var page = (_window_container.size.y + _vscroll_bar.min_value) / (_window_container.size.y + _vscroll_bar.max_value)
+	_vscroll_bar.page = int((_vscroll_bar.max_value - _vscroll_bar.min_value) * page)
+	_vscroll_bar.value = ceili((abs(value) / _vscroll_bar.max_value) * (_vscroll_bar.max_value - _vscroll_bar.page))
+	if _vscroll_bar.max_value == 0:
+		_window.position.y = 0
+
+func reset_window_position():
+	block_rect = blocks_rect() 
+
+	_window.position = (-block_rect.position + DEFAULT_WINDOW_MARGIN)
+	var range = block_rect_range()
+	_update_vscroll(_window.position.y, range.min, range.max)
 
 func canvas_to_window(v: Vector2) -> Vector2:
-	return _window.get_transform().affine_inverse() * v
+	return _window.get_transform().affine_inverse() * (v - DEFAULT_MARGIN_CONTAINER)
 
 
 func window_to_canvas(v: Vector2) -> Vector2:
-	return _window.get_transform() * v
+	return _window.get_transform() * (v + DEFAULT_MARGIN_CONTAINER)
 
 
 func is_mouse_over() -> bool:
 	return get_global_rect().has_point(get_global_mouse_position())
-
-
-func set_mouse_override(override: bool):
-	if override:
-		_mouse_override.mouse_filter = Control.MOUSE_FILTER_PASS
-		_mouse_override.mouse_default_cursor_shape = Control.CURSOR_MOVE
-	else:
-		_mouse_override.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		_mouse_override.mouse_default_cursor_shape = Control.CURSOR_ARROW
 
 
 func generate_script_from_current_window() -> String:
@@ -377,4 +433,7 @@ func generate_script_from_current_window() -> String:
 
 func _on_zoom_button_pressed():
 	zoom = 1.0
+	reset_window_position()
+	
+func _on_top_button_pressed():
 	reset_window_position()

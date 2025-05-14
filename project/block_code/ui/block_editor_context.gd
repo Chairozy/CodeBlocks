@@ -22,10 +22,8 @@ var parent_node: Node:
 			return null
 		return block_code_node.get_parent()
 
-
 func force_update() -> void:
 	changed.emit()
-
 
 static func get_default() -> BlockEditorContext:
 	if _instance == null:

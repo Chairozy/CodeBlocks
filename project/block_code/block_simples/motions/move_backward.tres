@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://5ru3kcythptw"]
+
+[ext_resource type="Script" path="res://block_code/code_generation/block_definition.gd" id="1_6jnl5"]
+
+[resource]
+script = ExtResource("1_6jnl5")
+name = &"move_forward"
+target_node_class = ""
+description = "Move actor towards his direction"
+category = "Motions"
+type = 2
+variant_type = 0
+display_template = "<3,2>"
+code_template = "act.add(forward.bind(16), {{{bni}}})"
+defaults = {}
+signal_name = ""
+scope = ""
+extend_of = Array[StringName]([])

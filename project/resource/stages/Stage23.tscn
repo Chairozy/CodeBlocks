@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdv2c14fi6xel"]
+
+[ext_resource type="TileSet" uid="uid://cbjfd7qa6l066" path="res://resource/stages/Tile.tres" id="1_vdsns"]
+[ext_resource type="Script" path="res://resource/stages/Stage22.gd" id="2_fdcyc"]
+[ext_resource type="PackedScene" uid="uid://1gq5dexbgw2x" path="res://resource/objectives/HorizontalGate.tscn" id="3_qc1qa"]
+[ext_resource type="PackedScene" uid="uid://v4ju68bm1ivl" path="res://resource/objectives/KeyGate.tscn" id="4_3kpfi"]
+[ext_resource type="PackedScene" uid="uid://belt1met7uwlq" path="res://resource/characters/character.tscn" id="5_vewds"]
+[ext_resource type="Script" path="res://block_code/block_code_node/block_code.gd" id="6_sdh80"]
+[ext_resource type="Resource" uid="uid://clnyvbhv6su1" path="res://resource/characters/CharBlockCode.tres" id="7_fojie"]
+[ext_resource type="PackedScene" uid="uid://bspylbwx4hxo6" path="res://resource/objectives/Goal.tscn" id="8_i8x7q"]
+
+[node name="Stage23" type="TileMap"]
+tile_set = ExtResource("1_vdsns")
+format = 2
+layer_0/name = "BelowLand"
+layer_0/tile_data = PackedInt32Array(262145, 851969, 5, 262147, 720897, 5, 65539, 720897, 5, 65537, 851969, 5)
+layer_1/name = "Land"
+layer_1/tile_data = PackedInt32Array(196609, 327681, 14, 131072, 851969, 5, 196608, 851969, 5, 3, 720897, 6, 2, 786433, 6, 262146, 524289, 14, 262147, 786433, 4, 262145, 786433, 4, 262148, 720897, 4, 196612, 720897, 5, 131076, 720897, 5, 65538, 262145, 12, 131075, 196609, 12, 196611, 458753, 14, 131074, 393217, 13, 131073, 65537, 12, 196610, 131073, 13, 262144, 851969, 4, 1, 851969, 6, 327683, 720897, 4, 327681, 851969, 4, 327682, 786433, 4, 65539, 786433, 6, 65537, 786433, 6)
+layer_2/name = "Fence"
+layer_2/tile_data = PackedInt32Array(196609, 2424833, 4, 196610, 2424833, 4, 262146, 2097153, 10)
+layer_3/name = "Fence2"
+layer_3/tile_data = PackedInt32Array()
+layer_4/name = "Prop"
+layer_4/tile_data = PackedInt32Array()
+script = ExtResource("2_fdcyc")
+blocks_limit = 8
+star1 = true
+star2 = true
+
+[node name="Gate" parent="." instance=ExtResource("3_qc1qa")]
+position = Vector2(40, 64)
+
+[node name="KeyGate" parent="." instance=ExtResource("4_3kpfi")]
+position = Vector2(40, 24)
+
+[node name="Character" parent="." instance=ExtResource("5_vewds")]
+position = Vector2(40, 40)
+
+[node name="BlockCode" type="Node" parent="Character"]
+script = ExtResource("6_sdh80")
+block_script = ExtResource("7_fojie")
+custom_catalogs = Array[StringName]([&"move_forward", &"rotate_left", &"rotate_right"])
+
+[node name="Goal" parent="." instance=ExtResource("8_i8x7q")]
+position = Vector2(40, 72)
+
+[connection signal="body_entered" from="KeyGate" to="." method="_on_key_gate_body_entered"]
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

@@ -1,25 +1,50 @@
-[gd_scene load_steps=12 format=3 uid="uid://bq37yla8ya707"]
+[gd_scene load_steps=23 format=3 uid="uid://bq37yla8ya707"]
 
 [ext_resource type="Script" path="res://block_code/ui/main_panel.gd" id="1_tqrq1"]
-[ext_resource type="Texture2D" uid="uid://d1ploy3jka4qe" path="res://resource/UI.png" id="2_42o7b"]
 [ext_resource type="PackedScene" uid="uid://dlabt3bgmpna2" path="res://block_code/ui/picker/picker.tscn" id="2_hv5f3"]
 [ext_resource type="PackedScene" uid="uid://bm1183pm05p6a" path="res://block_code/ui/title_bar/title_bar.tscn" id="2_k54yf"]
+[ext_resource type="Texture2D" uid="uid://1f2uib1sm35t" path="res://resource/ui/Sprite sheet for Basic Pack.png" id="3_8hhw7"]
 [ext_resource type="PackedScene" uid="uid://c6vumewgnfquy" path="res://block_code/ui/block_canvas/block_canvas.tscn" id="4_cu87g"]
 [ext_resource type="PackedScene" uid="uid://cph1k5cfximbf" path="res://block_code/drag_manager/drag_manager.tscn" id="4_yijtu"]
+[ext_resource type="PackedScene" uid="uid://bgrg4824gxmr3" path="res://resource/ui/HomeNode.tscn" id="7_jnrh4"]
+[ext_resource type="PackedScene" uid="uid://yu86o2nkdpp5" path="res://resource/ui/TeemoInstructor.tscn" id="9_ooge2"]
+[ext_resource type="FontFile" uid="uid://dvcsku06ao0ak" path="res://resource/fonts/Pixellari.ttf" id="10_kc44g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8iqi"]
+atlas = ExtResource("3_8hhw7")
+region = Rect2(512, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y4i3w"]
-atlas = ExtResource("2_42o7b")
-region = Rect2(0, 32, 96, 32)
+atlas = ExtResource("3_8hhw7")
+region = Rect2(208, 176, 64, 32)
+margin = Rect2(0, -5, 0, -5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_334w3"]
+atlas = ExtResource("3_8hhw7")
+region = Rect2(208, 176, 64, 32)
+margin = Rect2(0, -5, 0, -5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7vie"]
+atlas = ExtResource("3_8hhw7")
+region = Rect2(208, 208, 64, 32)
+margin = Rect2(0, -5, 0, -5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0vqh6"]
-atlas = ExtResource("2_42o7b")
-region = Rect2(0, 0, 96, 32)
+atlas = ExtResource("3_8hhw7")
+region = Rect2(144, 176, 32, 32)
+margin = Rect2(0, -5, 0, -5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_td2xy"]
-atlas = ExtResource("2_42o7b")
-region = Rect2(96, 0, 96, 32)
+atlas = ExtResource("3_8hhw7")
+region = Rect2(144, 208, 32, 32)
+margin = Rect2(0, -5, 0, -5)
 
-[sub_resource type="Image" id="Image_h6hyc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwpg5"]
+atlas = ExtResource("3_8hhw7")
+region = Rect2(176, 176, 32, 32)
+margin = Rect2(0, -5, 0, -5)
+
+[sub_resource type="Image" id="Image_6lkuo"]
 data = {
 "data": PackedByteArray(255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 92, 92, 92, 72, 91, 91, 91, 73, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 90, 90, 90, 116, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 71, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 93, 93, 93, 41, 90, 90, 90, 248, 90, 90, 90, 255, 90, 90, 90, 255, 92, 92, 92, 75, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 170, 170, 170, 3, 90, 90, 90, 201, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 200, 170, 170, 170, 3, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 90, 90, 90, 119, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 247, 96, 96, 96, 40, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 93, 93, 93, 41, 90, 90, 90, 248, 90, 90, 90, 255, 90, 90, 90, 255, 91, 91, 91, 118, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 170, 170, 170, 3, 90, 90, 90, 201, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 200, 170, 170, 170, 3, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 90, 90, 90, 119, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 247, 96, 96, 96, 40, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 93, 93, 93, 41, 90, 90, 90, 248, 90, 90, 90, 255, 90, 90, 90, 255, 91, 91, 91, 118, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 170, 170, 170, 3, 90, 90, 90, 201, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 200, 170, 170, 170, 3, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 91, 91, 91, 84, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 255, 96, 96, 96, 40, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 91, 91, 91, 84, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 255, 93, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 170, 170, 170, 3, 90, 90, 90, 200, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 200, 170, 170, 170, 3, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 93, 93, 93, 41, 90, 90, 90, 248, 90, 90, 90, 255, 90, 90, 90, 255, 91, 91, 91, 118, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 90, 90, 90, 119, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 248, 93, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 170, 170, 170, 3, 90, 90, 90, 200, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 200, 170, 170, 170, 3, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 93, 93, 93, 41, 90, 90, 90, 248, 90, 90, 90, 255, 90, 90, 90, 255, 91, 91, 91, 118, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 90, 90, 90, 119, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 248, 93, 93, 93, 41, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 170, 170, 170, 3, 90, 90, 90, 200, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 200, 170, 170, 170, 3, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 93, 93, 93, 41, 90, 90, 90, 248, 90, 90, 90, 255, 90, 90, 90, 255, 92, 92, 92, 75, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 90, 90, 90, 116, 90, 90, 90, 255, 90, 90, 90, 255, 90, 90, 90, 71, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 90, 90, 90, 71, 92, 92, 92, 72, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0, 255, 255, 255, 0),
 "format": "RGBA8",
@@ -29,9 +54,194 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_2e128"]
-image = SubResource("Image_h6hyc")
+image = SubResource("Image_6lkuo")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ld0tg"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+
+[sub_resource type="Animation" id="Animation_6mnhf"]
+resource_name = "In"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScrollContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.0796602, 1),
+"update": 0,
+"values": [0.0, 0.45]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:size:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(22, -0.25, 0, 0.25, 0, 62, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset_top")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.307786, 1),
+"update": 0,
+"values": [-44.0, -124.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:offset_bottom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.189465, 1),
+"update": 0,
+"values": [-22.0, -62.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ScrollContainer:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ScrollContainer/FailMessage:theme_override_colors/font_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.4, 1),
+"transitions": PackedFloat32Array(2.73208, 1),
+"update": 0,
+"values": [Color(0.909804, 0.811765, 0.65098, 1), Color(0.866667, 0.168627, 0.298039, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7sv28"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScrollContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:size:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(22, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:offset_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-22.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:offset_top")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-44.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ScrollContainer:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ScrollContainer/FailMessage:theme_override_colors/font_color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.909804, 0.811765, 0.65098, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_is75f"]
+_data = {
+"In": SubResource("Animation_6mnhf"),
+"RESET": SubResource("Animation_7sv28")
+}
 
 [node name="MainPanel" type="MarginContainer"]
+light_mask = 0
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,86 +251,231 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_tqrq1")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_constants/separation = 24
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="FrontUI" type="Control" parent="VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 152)
 layout_mode = 2
-size_flags_vertical = 3
+mouse_filter = 2
 
-[node name="ScriptVBox" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/FrontUI"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Control" type="Control" parent="VBoxContainer/FrontUI/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-alignment = 2
 
-[node name="UIContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ScriptVBox"]
-layout_mode = 2
-
-[node name="BlockCodeNode" type="TextureButton" parent="MarginContainer/HBoxContainer/ScriptVBox/UIContainer"]
+[node name="TeemoInstructor" parent="VBoxContainer/FrontUI/HBoxContainer/Control" instance=ExtResource("9_ooge2")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(288, 96)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 12.0
+offset_right = 0.0
+offset_bottom = 0.0
+scale = Vector2(2, 2)
+size_flags_horizontal = 3
+
+[node name="UIProp" type="Control" parent="VBoxContainer/FrontUI/HBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BlockLimitContainer" type="HBoxContainer" parent="VBoxContainer/FrontUI/HBoxContainer/Control/UIProp"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 32.0
+scale = Vector2(2, 2)
+
+[node name="BlockLimit" type="TextureRect" parent="VBoxContainer/FrontUI/HBoxContainer/Control/UIProp/BlockLimitContainer"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+texture = SubResource("AtlasTexture_e8iqi")
+
+[node name="BlockLimitLabel" type="Label" parent="VBoxContainer/FrontUI/HBoxContainer/Control/UIProp/BlockLimitContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.752941, 0.831373, 0.439216, 1)
+theme_override_colors/font_shadow_color = Color(0.952941, 0.956863, 0.905882, 1)
+theme_override_colors/font_outline_color = Color(0.337255, 0.396078, 0.376471, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 11
+theme_override_constants/line_spacing = 0
+text = "0 / 2"
+
+[node name="Control2" type="Control" parent="VBoxContainer/FrontUI/HBoxContainer"]
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/FrontUI/HBoxContainer/Control2"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 83.0
+offset_right = 46.0
+offset_bottom = 118.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_8hhw7")
+region_rect = Rect2(504, 152, 35, 20)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 6
+
+[node name="Level" type="Label" parent="VBoxContainer/FrontUI/HBoxContainer/Control2/NinePatchRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.026
+anchor_top = 0.179
+anchor_right = 0.974
+anchor_bottom = 0.857
+offset_left = 0.116
+offset_top = 5.735
+offset_right = 0.883999
+offset_bottom = -1.995
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.482353, 0.403922, 0.384314, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HomeNode" parent="VBoxContainer/FrontUI/HBoxContainer/Control2" instance=ExtResource("7_jnrh4")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_top = 34.0
+offset_right = -34.0
+offset_bottom = 66.0
+grow_horizontal = 0
+scale = Vector2(2.25, 2.25)
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PickerSplit" type="HSplitContainer" parent="VBoxContainer/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+dragger_visibility = 1
+
+[node name="MarginContainer2" type="Control" parent="VBoxContainer/MarginContainer2/PickerSplit"]
+custom_minimum_size = Vector2(288, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Toolbar" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar"]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 0
+
+[node name="BlockCodeNode" type="TextureButton" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 81)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 toggle_mode = true
+action_mode = 0
 texture_normal = SubResource("AtlasTexture_y4i3w")
+texture_pressed = SubResource("AtlasTexture_334w3")
+texture_hover = SubResource("AtlasTexture_f7vie")
 stretch_mode = 4
 
-[node name="RunNode" type="TextureButton" parent="MarginContainer/HBoxContainer/ScriptVBox/UIContainer"]
+[node name="RunNode" type="TextureButton" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(288, 96)
+custom_minimum_size = Vector2(96, 81)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 toggle_mode = true
 texture_normal = SubResource("AtlasTexture_0vqh6")
 texture_pressed = SubResource("AtlasTexture_td2xy")
+texture_hover = SubResource("AtlasTexture_mwpg5")
 stretch_mode = 0
 
-[node name="CodePanel" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ScriptVBox"]
+[node name="CodePanel" type="Control" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel"]
-layout_mode = 2
+[node name="TextureRect" type="NinePatchRect" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/CodePanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.25
+anchor_bottom = 0.25
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+size_flags_vertical = 3
+texture = ExtResource("3_8hhw7")
+region_rect = Rect2(107, 63, 26, 22)
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
-[node name="TitleBar" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/HBoxContainer" instance=ExtResource("2_k54yf")]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/CodePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 0
+
+[node name="TitleBar" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/CodePanel/VBoxContainer" instance=ExtResource("2_k54yf")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="PickerSplit" type="HSplitContainer" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Picker" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit" instance=ExtResource("2_hv5f3")]
-unique_name_in_owner = true
+[node name="BottomBar" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/CodePanel/VBoxContainer"]
+visible = false
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit"]
-layout_mode = 2
-theme_override_constants/margin_bottom = 4
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit/MarginContainer"]
-layout_mode = 2
-
-[node name="BlockCanvas" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit/MarginContainer/VBoxContainer" instance=ExtResource("4_cu87g")]
-unique_name_in_owner = true
-layout_mode = 2
-
-[node name="BottomBar" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="CollapseButton" type="Button" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit/MarginContainer/VBoxContainer/BottomBar"]
+[node name="CollapseButton" type="Button" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/CodePanel/VBoxContainer/BottomBar"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
@@ -128,19 +483,93 @@ tooltip_text = "Toggle Block Picker (Ctrl+BackSlash)"
 icon = SubResource("ImageTexture_2e128")
 flat = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit/MarginContainer/VBoxContainer/BottomBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/CodePanel/VBoxContainer/BottomBar"]
 layout_mode = 2
 
-[node name="DragManager" parent="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer" instance=ExtResource("4_yijtu")]
+[node name="Picker" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/CodePanel/VBoxContainer" instance=ExtResource("2_hv5f3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="Control" parent="VBoxContainer/MarginContainer2/PickerSplit"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="FailPanel" type="MarginContainer" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -44.0
+offset_right = 12.0001
+offset_bottom = -22.0
+scale = Vector2(2, 2)
+
+[node name="Dialog" type="NinePatchRect" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer/FailPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_8hhw7")
+region_rect = Rect2(455, 139, 30, 28)
+patch_margin_left = 8
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 18
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer/FailPanel"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ld0tg")
+
+[node name="FailMessage" type="Label" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer/FailPanel/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.909804, 0.811765, 0.65098, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 0.670588, 1)
+theme_override_constants/outline_size = 6
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("10_kc44g")
+theme_override_font_sizes/font_size = 16
+text = "OOPS!
+Saya belum di kode dengan benar
+Ayo coba perbaiki!"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer/FailPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_is75f")
+}
+
+[node name="Codebar" type="VBoxContainer" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="BlockCanvas" parent="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer/Codebar" instance=ExtResource("4_cu87g")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DragManager" parent="VBoxContainer/MarginContainer2" instance=ExtResource("4_yijtu")]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
-picker_path = NodePath("../PickerSplit/Picker")
-block_canvas_path = NodePath("../PickerSplit/MarginContainer/VBoxContainer/BlockCanvas")
+picker_path = NodePath("../PickerSplit/MarginContainer2/Toolbar/CodePanel/VBoxContainer/Picker")
+block_canvas_path = NodePath("../PickerSplit/MarginContainer/Codebar/BlockCanvas")
 
-[connection signal="toggled" from="MarginContainer/HBoxContainer/ScriptVBox/UIContainer/BlockCodeNode" to="." method="_on_block_code_node_pressed"]
-[connection signal="toggled" from="MarginContainer/HBoxContainer/ScriptVBox/UIContainer/RunNode" to="." method="_on_run_node_pressed"]
-[connection signal="add_block_code" from="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit/MarginContainer/VBoxContainer/BlockCanvas" to="." method="_on_block_canvas_add_block_code"]
-[connection signal="open_scene" from="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit/MarginContainer/VBoxContainer/BlockCanvas" to="." method="_on_block_canvas_open_scene"]
-[connection signal="replace_block_code" from="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit/MarginContainer/VBoxContainer/BlockCanvas" to="." method="_on_block_canvas_replace_block_code"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/ScriptVBox/CodePanel/MarginContainer/PickerSplit/MarginContainer/VBoxContainer/BottomBar/CollapseButton" to="." method="_on_collapse_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/FrontUI/HBoxContainer/Control2/HomeNode" to="." method="_on_home_node_pressed"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/HBoxContainer/BlockCodeNode" to="." method="_on_block_code_node_pressed"]
+[connection signal="toggled" from="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/HBoxContainer/RunNode" to="." method="_on_run_node_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer2/Toolbar/CodePanel/VBoxContainer/BottomBar/CollapseButton" to="." method="_on_collapse_button_pressed"]
+[connection signal="add_block_code" from="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer/Codebar/BlockCanvas" to="." method="_on_block_canvas_add_block_code"]
+[connection signal="open_scene" from="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer/Codebar/BlockCanvas" to="." method="_on_block_canvas_open_scene"]
+[connection signal="replace_block_code" from="VBoxContainer/MarginContainer2/PickerSplit/MarginContainer/Codebar/BlockCanvas" to="." method="_on_block_canvas_replace_block_code"]

@@ -100,6 +100,6 @@ func connect_block_canvas_signals(block: Block):
 
 
 func _on_block_drag_started(block: Block, offset: Vector2):
-	if block.definition.category == "Lifecycle":
+	if block.definition.category == "Lifecycle" or block.lock:
 		return
 	drag_block(block, null, offset)

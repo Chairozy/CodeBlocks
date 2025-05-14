@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5jxwx5qmvwiw"]
+
+[ext_resource type="Texture2D" uid="uid://b3osxjs5enqi0" path="res://resource/tiles/sea.png" id="1_e8a6i"]
+[ext_resource type="Script" path="res://block_code/block_code_manager.gd" id="2_pe88x"]
+[ext_resource type="Script" path="res://block_code/canvas_scene.gd" id="3_ryocu"]
+
+[sub_resource type="GDScript" id="GDScript_vpxn8"]
+script/source = "extends Camera2D
+
+@onready var _background: TextureRect
+
+func _ready():
+	_background = get_parent().get_node(\"Background\")
+	limit_left = _background.position.x
+	limit_right = _background.position.x + _background.size.x
+	limit_top = _background.position.y
+	limit_bottom = _background.position.y + _background.size.y
+
+func _unhandled_input(event: InputEvent):
+	if event is InputEventMouseMotion:
+		if event.button_mask == MOUSE_BUTTON_MASK_LEFT:
+			position = get_screen_center_position()
+			position -= event.relative / zoom
+
+
+"
+
+[node name="Playground" type="Node"]
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -320.0
+offset_top = -192.0
+offset_right = 480.0
+offset_bottom = 440.0
+texture = ExtResource("1_e8a6i")
+stretch_mode = 1
+
+[node name="BlockCodeManager" type="CanvasLayer" parent="."]
+script = ExtResource("2_pe88x")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(116, 80)
+zoom = Vector2(4, 4)
+script = SubResource("GDScript_vpxn8")
+
+[node name="CanvasScene" type="Node2D" parent="."]
+light_mask = 0
+script = ExtResource("3_ryocu")

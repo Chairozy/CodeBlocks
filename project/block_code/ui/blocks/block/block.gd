@@ -40,10 +40,43 @@ signal modified
 ## Whether the block can be deleted by the Delete key.
 var can_delete: bool = true
 
+var lock: bool = false
+
 var _block_extension: BlockExtension
+
+var _hightlight: bool = false
+var _outlight: bool = false
 
 @onready var _context := BlockEditorContext.get_default()
 
+func hightlight(dur: float = 0.0):
+	if not visible:
+		return
+	BlockCodeManager.main_panel\
+		._block_canvas.scroll_to_block(self)
+	if dur == 0.0:
+		_hightlight = true
+		get_node("%Background").queue_redraw()
+	else:
+		_outlight = true
+		bg_redraw()
+		await get_tree().create_timer(dur).timeout
+		_outlight = false
+		bg_redraw()
+
+func offlight():
+	_hightlight = false
+	bg_redraw()
+
+func bg_redraw():
+	if get_node("%SnapGutter"):
+		get_node("%SnapGutter").queue_redraw()
+	if get_node("%Background"):
+		get_node("%Background").queue_redraw()
+	if get_node("%TopBackground"):
+		get_node("%TopBackground").queue_redraw()
+	if get_node("%BottomBackground"):
+		get_node("%BottomBackground").queue_redraw()
 
 func _ready():
 	focus_mode = FocusMode.FOCUS_ALL
@@ -54,6 +87,7 @@ func _ready():
 
 
 func _block_on_focus_entered():
+	_hightlight = false
 	z_index = 1
 	if bottom_snap:
 		bottom_snap.z_index = -1
@@ -62,6 +96,7 @@ func _block_on_focus_entered():
 
 
 func _block_on_focus_exited():
+	_hightlight = false
 	z_index = 0
 	if bottom_snap:
 		bottom_snap.z_index = 0

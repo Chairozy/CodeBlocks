@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://v4ju68bm1ivl"]
+
+[ext_resource type="Texture2D" uid="uid://qw28hiafk4jc" path="res://resource/objectives/objectives.png" id="1_8244p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrxal"]
+atlas = ExtResource("1_8244p")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_byj11"]
+size = Vector2(8, 8)
+
+[node name="KeyGate" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_wrxal")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_byj11")

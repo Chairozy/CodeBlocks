@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://drde2ta3yk44n"]
+
+[ext_resource type="TileSet" uid="uid://cbjfd7qa6l066" path="res://resource/stages/Tile.tres" id="1_63n4w"]
+[ext_resource type="Script" path="res://resource/stages/Stage03.gd" id="2_f2tqc"]
+[ext_resource type="PackedScene" uid="uid://belt1met7uwlq" path="res://resource/characters/character.tscn" id="3_3plhv"]
+[ext_resource type="Script" path="res://block_code/block_code_node/block_code.gd" id="4_y3r5b"]
+[ext_resource type="Resource" uid="uid://clnyvbhv6su1" path="res://resource/characters/CharBlockCode.tres" id="5_1ilta"]
+[ext_resource type="PackedScene" uid="uid://bspylbwx4hxo6" path="res://resource/objectives/Goal.tscn" id="6_agc6j"]
+
+[node name="Stage19" type="TileMap"]
+tile_set = ExtResource("1_63n4w")
+format = 2
+layer_0/name = "BelowLand"
+layer_1/name = "Land"
+layer_1/tile_data = PackedInt32Array(196609, 327681, 14, 131072, 851969, 5, 196608, 851969, 5, 3, 786433, 6, 2, 786433, 6, 65539, 458753, 12, 262146, 786433, 4, 262147, 786433, 4, 262145, 786433, 4, 262148, 720897, 4, 196612, 720897, 5, 131076, 720897, 5, 65538, 131073, 12, 131075, 196609, 13, 196611, 458753, 14, 131074, 393217, 13, 131073, 65537, 13, 196610, 131073, 14, 262144, 851969, 4, 65540, 720897, 5, 65536, 851969, 5, 1, 786433, 6, 65537, 327681, 12, 0, 851969, 6, 4, 720897, 6)
+layer_2/name = "Fence"
+layer_2/tile_data = PackedInt32Array(131074, 2490369, 3, 65538, 2686977, 1, 1, 2686977, 1, 65537, 2686977, 2, 131073, 2686977, 3, 131075, 2621441, 3, 3, 2686977, 1, 65539, 2686977, 2)
+layer_3/name = "Prop"
+layer_3/tile_data = PackedInt32Array(65537, 2097153, 9)
+script = ExtResource("2_f2tqc")
+blocks_limit = 11
+star1 = true
+star2 = true
+
+[node name="Character" parent="." instance=ExtResource("3_3plhv")]
+position = Vector2(56, 40)
+up_direction = Vector2(0.577292, -0.816538)
+direction = Vector2(0, -1)
+
+[node name="BlockCode" type="Node" parent="Character"]
+script = ExtResource("4_y3r5b")
+block_script = ExtResource("5_1ilta")
+custom_catalogs = Array[StringName]([&"move_forward", &"rotate_left", &"rotate_right"])
+
+[node name="Goal" parent="." instance=ExtResource("6_agc6j")]
+position = Vector2(24, 24)
+
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]

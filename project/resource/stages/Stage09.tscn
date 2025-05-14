@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://tbike3kv33io"]
+
+[ext_resource type="TileSet" uid="uid://cbjfd7qa6l066" path="res://resource/stages/Tile.tres" id="1_125jn"]
+[ext_resource type="Script" path="res://resource/stages/Stage03.gd" id="2_vs2du"]
+[ext_resource type="PackedScene" uid="uid://belt1met7uwlq" path="res://resource/characters/character.tscn" id="3_gec4l"]
+[ext_resource type="Script" path="res://block_code/block_code_node/block_code.gd" id="4_84fq5"]
+[ext_resource type="Resource" uid="uid://clnyvbhv6su1" path="res://resource/characters/CharBlockCode.tres" id="5_p0a24"]
+[ext_resource type="PackedScene" uid="uid://bspylbwx4hxo6" path="res://resource/objectives/Goal.tscn" id="6_45e6i"]
+
+[node name="Stage9" type="TileMap"]
+tile_set = ExtResource("1_125jn")
+format = 2
+layer_0/name = "BelowLand"
+layer_1/name = "Land"
+layer_1/tile_data = PackedInt32Array(131073, 327681, 14, 65538, 458753, 12, 196610, 786433, 4, 131075, 720897, 5, 196609, 786433, 4, 131074, 196609, 14, 65537, 65537, 12, 65539, 720897, 5, 196611, 720897, 4, 131072, 851969, 5, 65536, 851969, 5, 0, 851969, 6, 1, 786433, 6, 196608, 851969, 4, 3, 720897, 6, 2, 786433, 6)
+layer_2/name = "Fence"
+layer_2/tile_data = PackedInt32Array(65537, 2621441, 4, 131073, 2686977, 4, 65536, 2490369, 3, 0, 2686977, 1, 131074, 2752513, 4)
+layer_3/name = "Prop"
+layer_3/tile_data = PackedInt32Array(65537, 2228225, 9)
+script = ExtResource("2_vs2du")
+blocks_limit = 6
+star1 = true
+star2 = true
+
+[node name="Character" parent="." instance=ExtResource("3_gec4l")]
+position = Vector2(24, 40)
+
+[node name="BlockCode" type="Node" parent="Character"]
+script = ExtResource("4_84fq5")
+block_script = ExtResource("5_p0a24")
+custom_catalogs = Array[StringName]([&"move_forward", &"rotate_left", &"rotate_right"])
+
+[node name="Goal" parent="." instance=ExtResource("6_45e6i")]
+position = Vector2(24, 24)
+
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
