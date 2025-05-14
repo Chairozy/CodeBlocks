@@ -24,7 +24,7 @@ func _ready():
 	var files_path = DirAccess.get_files_at("res://resource/stages/")
 	files_path.sort()
 	for filePath in files_path:
-		if not filePath.ends_with(".tscn"):
+		if not filePath.get_extension() == "tscn":
 			continue
 		STAGES.append(SingleStage.new("res://resource/stages/" + filePath))
 
@@ -72,7 +72,7 @@ func get_single_stage() -> SingleStage:
 
 func _create_playground():
 	var single_stage = STAGES[currentLevel-1]
-	single_stage.node = load(single_stage.path).instantiate()
+	single_stage.node = ResourceLoader.load(single_stage.path).instantiate()
 	get_tree().current_scene\
 		.get_node("CanvasScene")\
 		.add_child(single_stage.node)
